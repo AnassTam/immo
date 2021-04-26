@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PropertyController!{% endblock %}
+
+{% block body %}
+ <h1>Voir la liste des annonces</h1>
+  <div class="row">
+   <div class="col-lg-3">
+    <form action="" methode="get">
+     <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
+     <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
+     <select class="form-control mb-3" name="size">
+      <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
+      {% for size in sizes %}
+      <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
+      {% endfor %}
+
+     </select>
+     <button class="btn btn-primary btn-block ">Filtrer </button>
+    </form>
+
+   </div>
+
+   <div class="col-lg-9">
+    <div class="row">
+     {% for property in properties %}
+     <div class="col-lg-4">
+      <div class="card">
+       <a href="{{ path('property_show',{slug:property.title}) }}">
+        {{ property.title }}
+
+
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+ <ul>
+  {% for property in properties %}
+
+  <li>
+   <a href="{{ path('property_show',{slug:property.title}) }}">
+    {{ property.title }}
+   </a>
+
+  </li>
+  {% endfor %}
+
+ </ul>
+ <button  class ="btn btn-primary" id="ajax-properties">Appel Ajax </button>
+{% endblock %}

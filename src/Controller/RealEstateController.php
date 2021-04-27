@@ -18,7 +18,7 @@ class RealEstateController extends AbstractController
      *
      *
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $sizes=[
             1=>'Studio',
@@ -30,7 +30,11 @@ class RealEstateController extends AbstractController
         ];
 
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
-        $properties = $repository->findAll();
+        $properties = $repository->findAllWiththeFilters(
+            $request->get('surface',0),
+            $request->get('price',9999999999999),
+            $request->get('size')
+        );
 
 
 

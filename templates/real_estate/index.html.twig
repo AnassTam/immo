@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/chercher.js') }}"></script>
+{% endblock %}
+
 {% block body %}
     <div class="row my-4">
         <div class="col-lg-10">
@@ -11,7 +16,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <form action="" methode="get">
+            <form action="" method="get">
                 <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
                 <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
                 <select class="form-control mb-3" name="size">
@@ -28,11 +33,11 @@
 
 
     <div class="col -lg-9">
-        <div class="row">
+        <div class="row" id="real-estate-list">
             {% for property in properties %}
                 <div class="col-lg-4">
                     <div class="card">
-                        <img src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
+                        <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
                     <div class="card-body">
                         <h5 class="card-title">
                             <a href="{{ path('real_estate_show',{slug:property.slug, id:property.id}) }}">

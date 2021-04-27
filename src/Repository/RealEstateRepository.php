@@ -19,6 +19,38 @@ class RealEstateRepository extends ServiceEntityRepository
         parent::__construct($registry, RealEstate::class);
     }
 
+    public function  findAllWiththeFilters($surface,$price,$rooms)
+    {
+        // Select * From real_estate WHERE surface >50
+        $qb = $this->createQueryBuilder('r');
+           // ->where('r.surface > :surface')
+            //->andWhere('r.price <:price')
+            //->andWhere('r.rooms =:rooms')
+           // ->setParameters('surface,$surface');
+
+        if(!empty($surface)){
+            $qb->andWhere('r.surface > :surface')->setParameter('surface',$surface);
+        }
+        if(!empty($price)){
+            $qb->andWhere('r.price < :price')->setParameter('price',$price);
+        }
+        if(!empty($rooms)){
+            $qb->andWhere('r.rooms = :rooms')->setParameter('rooms',$rooms);
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
+// chercher les bien dans la base de donnée
+    public function search($query){
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.title LIKE :query')
+            ->setParameter('query','%'.$query.'%');
+
+        return $qb->getQuery()->getResult();
+
+    }
+
     // /**
     //  * @return RealEstate[] Returns an array of RealEstate objects
     //  */

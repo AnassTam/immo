@@ -36,14 +36,9 @@ class RealEstateType extends AbstractType
                     'T5'=>5,
                 ],
             ])
-            ->add('type',ChoiceType::class,[
-                'choices'=>[
-                    'Maison'=>'maison',
-                    'Appartement'=>'appartement',
-                   ],'expanded'=>true,
-            ]
-
-    )
+            ->add('type',null,[
+                'choice_label'=>'name',
+        ])
             ->add('sold', ChoiceType::class, [
                 'label' => 'vendu ?',
                 'choices' => [

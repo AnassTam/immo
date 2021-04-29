@@ -76,11 +76,6 @@ class RealEstate
      */
     private $rooms;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     */
-    private $type;
 
     /**
      * @ORM\Column(type="boolean")
@@ -97,6 +92,12 @@ class RealEstate
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="realEstates")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -175,17 +176,6 @@ class RealEstate
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getSold(): ?bool
     {
@@ -219,6 +209,18 @@ class RealEstate
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

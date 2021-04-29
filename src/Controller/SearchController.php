@@ -14,13 +14,10 @@ class SearchController extends AbstractController
      */
     public function index($query = '',RealEstateRepository $repository): Response
     {
-
         $realEstates =$repository->search($query);
         return $this->json([
-            'results' =>$realEstates,
-             'html' => $this->renderView('real_estate/_real_estate.html.twig',['properties' => $realEstates]),
-    ]);
 
+            'html' => $this->renderView('real_estate/_real_estate.html.twig',['properties' => $realEstates]),
+        ]);
     }
 }
-

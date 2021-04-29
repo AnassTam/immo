@@ -44,7 +44,7 @@ class RealEstateRepository extends ServiceEntityRepository
 // chercher les bien dans la base de donnée
     public function search($query){
         $qb = $this->createQueryBuilder('r')
-            ->where('r.title LIKE :query')
+            ->where('r.title Like :query')
             ->setParameter('query','%'.$query.'%');
 
         return $qb->getQuery()->getResult();

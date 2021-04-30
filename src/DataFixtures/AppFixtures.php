@@ -27,11 +27,24 @@ class AppFixtures extends Fixture
         $faker = Factory::create("fr_FR");
 
         // fixtures table user
+          //creation de Admin
         $user = new User();
         $user->setEmail('anass@gmail.com');
         $user->setPassword($this->passwordEncoder->encodePassword($user,'test'));
         $user->setRoles(['ROLE_ADMIN']);
+        $this->addReference('user-0', $user);
         $manager->persist($user);
+
+
+           //creation des utilisateurs user
+        for ($i = 1; $i<= 9; $i++){
+            $user = new User();
+            $user->setEmail($faker->email);
+            $user->setPassword($this->passwordEncoder->encodePassword($user,'test'));
+            $this->addReference('user-'.$i, $user);
+            $manager->persist($user);
+    }
+
 
 
 
@@ -63,6 +76,7 @@ class AppFixtures extends Fixture
         $realEstate->setSlug($faker->slug);
         $realEstate->setImage($faker->randomElement(['image1.jpg','image2.jpg','image3.jpg']));
 
+        $realEstate->setOwner($this->getReference('user-'.rand(0, 9)));
             $manager->persist($realEstate);
         }
 

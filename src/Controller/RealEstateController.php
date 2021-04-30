@@ -85,6 +85,9 @@ class RealEstateController extends AbstractController
             $realEstate->setImage($fileName);
 
 
+            // je relie  l'annonce à l'utilisateur qui est connecté
+             $realEstate->setOwner($this->getUser());
+
             //Je dois ajouter  l'objet dans bdd
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($realEstate);
@@ -106,7 +109,7 @@ class RealEstateController extends AbstractController
          $form = $this->createForm(RealEstateType::class,$realEstate);
          $form->handLeREquest($request);
          if($form->isSubmitted() && $form->isValid()) {
-             // Mofification de l 'image
+             // Modification de l 'image
 
              $image=$form->get('image')->getData();
              if ($image) {

@@ -48,9 +48,16 @@
                         <p class="card-text">
                             {{ property.surface }}m² - {{ property.rooms }} pièce(s)
                         </p>
+                        <p class="card-text">
+                            Propriétaire: {{ property.owner.email|split('@')[0] }}
+                        </p>
+
+                        {# condition pour verifier que l'utilistaeur est le propriaire de l'annonce  #}
+                        {% if app.user == property.owner %}
                         <p class="property-price">{{ property.price }} euros</p>
                         <a href="{{ path('real_estate_edit',{id:property.id}) }}" class="btn btn-primary mr-2">Modifier</a>
                         <a href="{{ path('real_estate_delete',{id:property.id}) }}" class="btn btn-danger">Supprimer</a>
+                        {% endif %}
                     </div>
                     </div>
                 </div>

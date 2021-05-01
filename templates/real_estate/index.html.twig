@@ -36,8 +36,11 @@
         <div class="row" id="real-estate-list">
             {% for property in properties %}
                 <div class="col-lg-4">
-                    <div class="card">
-                        <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
+                    <div class="card mb-4">
+                        {% if property.sold %}
+                        <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
+                        {% endif %}
+                        <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" >
                     <div class="card-body">
                         <h5 class="card-title">
                             <a href="{{ path('real_estate_show',{slug:property.slug, id:property.id}) }}">

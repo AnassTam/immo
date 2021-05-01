@@ -106,6 +106,15 @@ class RealEstateController extends AbstractController
      * @route("/nos-biens/modifier/{id}", name="real_estate_edit")
      */
      public function edit(Request $request, RealEstate $realEstate){
+
+         // Condition de voir si l'utilisateur a bien le droit   de modifier l'annonce$
+
+         if($this->getUser() !==$realEstate->getOwner()){
+             throw $this->createAccessDeniedException(); // affiche erreur
+
+         }
+
+
          $form = $this->createForm(RealEstateType::class,$realEstate);
          $form->handLeREquest($request);
          if($form->isSubmitted() && $form->isValid()) {
@@ -136,6 +145,13 @@ class RealEstateController extends AbstractController
      * @route("/nos-biens/supprimer/{id}", name="real_estate_delete")
      */
      public function delete(RealEstate $realEstate){
+         // Condition de voir si l'utilisateur a bien le droit   de supprimer l'annonce$
+
+         if($this->getUser() !==$realEstate->getOwner()){
+             throw $this->createAccessDeniedException(); // affiche erreur
+
+         }
+
          $entityManager=$this->getDoctrine()->getManager();
          $entityManager->remove($realEstate);
          $entityManager ->flush();

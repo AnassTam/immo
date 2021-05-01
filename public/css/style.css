@@ -8,10 +8,16 @@ body{
  .AllCardImage {
      object-fit: cover;
      height: 300px;
+
+ }
+ .divImg{
+     position: relative;
+
  }
  .vendu {
      width: 150px;
      position: absolute;
      right: 0;
+     z-index: 1;
  }
 

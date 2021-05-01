@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="row py-4" xmlns="http://www.w3.org/1999/html">
-       <div class="col-log-6">
+       <div class="col-log-6 divImg">
+           {% if property.sold %}
+               <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
+           {% endif %}
            <img src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
        </div>
        <div class="col-log-6">
@@ -9,11 +12,13 @@
            <p class="property-price text-primary">
                <strong>{{ property.price }} € </strong>
                </p>
+           <a href="{{ path('cart_add', { id:property.id }) }}" class="btn  btn-primary btn-block"> Acheter</a>
+
        </div>
    </div>
 
     <div class="py-4">
-        <div class="mb-4">
+        <div class="mb-4">php bin/console
             {{ property.description }}
         </div>
 

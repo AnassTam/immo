@@ -1,6 +1,7 @@
 body{
-    background-color :lightblue;
-
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
 }
  .property-price{
      font-size: 28px;
@@ -21,3 +22,22 @@ body{
      z-index: 1;
  }
 
+.imagecc{
+
+    position: absolute;
+    z-index:-1;
+}
+
+.card_accueil>img{
+
+}
+h5{
+    text-align: center;
+}
+
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}

@@ -41,6 +41,7 @@ class CarteController extends AbstractController
         return $this->render('cart/index.html.twig', [
             'items' => $panier->getItems(),
 
+
         ]);
     }
 

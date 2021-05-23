@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+{% block page_base %}
     <div class="row py-4" xmlns="http://www.w3.org/1999/html">
        <div class="col-log-6 divImg">
            {% if property.sold %}
@@ -18,7 +18,7 @@
    </div>
 
     <div class="py-4">
-        <div class="mb-4">php bin/console
+        <div class="mb-4">
             {{ property.description }}
         </div>
 
@@ -44,6 +44,10 @@
 <tr>
                     <td>Type de bien </td>
                     <td>{{ property.type.name |capitalize}}</td>
+                </tr>
+                <tr>
+                    <td>Localisation</td>
+                    <td>Lille</td>
                 </tr>
 
                 </tbody>

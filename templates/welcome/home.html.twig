@@ -1,16 +1,152 @@
 {% extends 'base.html.twig' %}
- {% block body %}
+ {% block page_base %}
 
-     <div class ="jumbotron">
-         <h1>
-             Mon agence Immobiliare
-         </h1>
-         <p>
-             Bienvenue sur l'agence
-         </p>
-         {# Pour recuper la route actuelle #}
-          {{  app.request.get('_route') }}
+     <div class="container-fluid px-0   " >
+         <div class="row mt-5" >
+             <div class="card col-12    " >
+                 <img class="" src="{{ asset('img/image_accueil1.png') }}" alt="Card image">
+                 <div class="card-img-overlay">
+                     <div class="col-md-3 offset-md-3 bg-light ">
+                          <h3>Chercher un bien</h3>
+
+
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+         {#  2 div   j'achete un bien & je vends mon  bien  #}
+
+         <div class="row justify-content-center mt-5 " style="background-color:  #EBEBEB">
+             <h2 class=" mb-5">  Nous  allons  vous aider pour trouver  votre bonheur </h2>
+             <div class="card-deck col-8 ">
+
+                 <div class="card card_accueil ">
+
+                     <img class="card-img-top" src="{{ asset('img/acheter_un_bien.jpg') }}" alt="Card image cap">
+                     <div class="card-body">
+                         <h5 class="card-title">J'achete un bien </h5>
+                         <p class="card-text">Trouvez votre nouvelle maison,appartement ou autre... . toutes nos annonces ont des photos descriptives du bien.  y compris des choses que vous ne trouvez  nulle part ailleurs </p>
+                         <a href="#" class="stretched-link"></a>
+                     </div>
+                 </div>
+                 <div class="card card_accueil">
+                     <img class="card-img-top" src="{{ asset('img/vendre_un_bien.jpg') }}" alt="Card image cap">
+                     <div class="card-body">
+                         <h5 class="card-title">Je vends mon bien  </h5>
+                         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                         <a href="#" class="stretched-link"></a>
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+         {#  debut carousel #}
+     <div class="row  justify-content-center mt-1 ">
+             <div class="col-8">
+                 <div class="card  ">
+                     <div class="card-header bg-primary text-white text-uppercase">
+                         <i class="fa fa-star"></i> Nos coup de coeur
+                     </div>
+                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                     <ol class="carousel-indicators">
+                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                     </ol>
+                     <div class="carousel-inner">
+                         <div class="carousel-item active">
+                             <img class="d-block w-100"  src="{{ asset('img/maison1.jpg') }}" alt="First slide">
+                         </div>
+                         <div class="carousel-item">
+                             <img class="d-block w-100"  src="{{ asset('img/maison2.jpg') }}"  alt="Second slide">
+                         </div>
+                         <div class="carousel-item">
+                             <img class="d-block w-100"  src="{{ asset('img/maison3.jpg') }}" alt="Third slide">
+                         </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                         <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                         <span class="sr-only">Next</span>
+                     </a>
+                 </div>
+             </div>
+
+             </div>
+         {# Dernieres annonces #}
+             <div class="row  justify-content-center mt-1 " style="background-color:  #EBEBEB" >
+
+                 <div class=" col-8"  >
+                     <div class="card  ">
+                         <div class="card-header bg-primary text-white text-uppercase">
+                             <i class="fa fa-star"></i> Dernières annonces
+                         </div>
+                         <div class="card-body">
+                             <div class="row">
+                                 <div class="col-sm">
+                                     <div class="card">
+                                         <img class="card-img-top"  src="{{ asset('img/maison1.jpg') }}" alt="Card image cap">
+                                         <div class="card-body">
+                                             <a href="#" class="stretched-link"><h4 class="card-title">Produit</h4></a>
+
+
+                                             <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                             <div class="row">
+                                                 <div class="col">
+                                                     <p class="btn btn-info btn-block">99.00 &euro;</p>
+                                                 </div>
+
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-sm">
+                                     <div class="card">
+                                         <img class="card-img-top"  src="{{ asset('img/maison2.jpg') }}" alt="Card image cap">
+                                         <div class="card-body">
+                                             <a href="#" class="stretched-link"><h4 class="card-title">Produit</h4></a>
+                                             <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                             <div class="row">
+                                                 <div class="col">
+                                                     <p class="btn btn-info btn-block">99.00 &euro;</p>
+                                                 </div>
+
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-sm">
+                                     <div class="card">
+                                         <img class="card-img-top"  src="{{ asset('img/maison3.jpg') }}" alt="Card image cap">
+                                         <div class="card-body">
+                                             <a href="#" class="stretched-link"><h4 class="card-title">Produit</h4></a>
+                                             <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                             <div class="row">
+                                                 <div class="col">
+                                                     <p class="btn btn-info btn-block">99.00 &euro;</p>
+                                                 </div>
+
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+         </div>
+
+         <div class="row mt-1">
+             <p class=" col-4 ml-1">Vendu grâce à nos</p>
+         </div>
      </div>
 
 
-{% endblock  %}
+
+ {% endblock %}

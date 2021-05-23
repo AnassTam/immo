@@ -1,6 +1,6 @@
 {% extends'base.html.twig' %}
 
-{% block body %}
+{% block page_base %}
 Voir l'annonce{{ slug|upper}}
     {% for letter in 'a'..'z' %}
         {{ letter|upper }},

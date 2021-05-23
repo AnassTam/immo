@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\RealEstate;
 use App\Form\RealEstateType;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +20,15 @@ class RealEstateController extends AbstractController
      *
      *
      */
-    public function index(Request $request): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
+
         $sizes=[
             1=>'Studio',
             2=>'T2',
             3=>'T3',
             4=>'T4',
             5=>'T5',
-
         ];
 
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
@@ -37,11 +39,15 @@ class RealEstateController extends AbstractController
         );
 
 
-
+        $pagination = $paginator->paginate(
+            $properties, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
 
         return $this->render('real_estate/index.html.twig',[
             'sizes' =>$sizes,
-            'properties'=>$properties,
+            'properties'=>$pagination,
         ]);
     }
 
@@ -77,7 +83,7 @@ class RealEstateController extends AbstractController
             $slug = $slugger->slug($realEstate->getTitle());
             $realEstate->setSlug($slug);
 
-            //telechargement de  l image
+            //telechargement de l image
 
             $image=$form->get('image')->getData();
             $fileName=uniqid().'.'.$image->guessExtension();

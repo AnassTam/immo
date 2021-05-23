@@ -170,7 +170,6 @@ class RealEstate
             3=>'T3',
             4=>'T4',
             5=>'T5',
-
         ];
         return $sizes[$this->rooms];
     }
@@ -181,7 +180,6 @@ class RealEstate
 
         return $this;
     }
-
 
     public function getSold(): ?bool
     {

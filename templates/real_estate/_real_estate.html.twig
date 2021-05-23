@@ -1,7 +1,7 @@
 {% for property in properties %}
     <div class="col-lg-4">
         <div class="card">
-            <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
+            <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" >
             <div class="card-body">
                 <h5 class="card-title">
                     <a href="{{ path('real_estate_show',{slug:property.slug, id:property.id}) }}">

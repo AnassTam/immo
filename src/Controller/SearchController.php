@@ -12,12 +12,14 @@ class SearchController extends AbstractController
     /**
      * @Route("/api/search/{query}", name="api_search")
      */
-    public function index($query = '',RealEstateRepository $repository): Response
+    public function index($query = '', RealEstateRepository $repository): Response
     {
-        $realEstates =$repository->search($query);
+        // On va chercher les annonces grâce au Repository
+        $realEstates = $repository->search($query);
+        // On renvoie du JSON car c'est une API
         return $this->json([
-
-            'html' => $this->renderView('real_estate/_real_estate.html.twig',['properties' => $realEstates]),
+            // 'results' => $realEstates,
+            'html' => $this->renderView('real_estate/_real_estate.html.twig', ['properties' => $realEstates]),
         ]);
     }
 }

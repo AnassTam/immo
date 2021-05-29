@@ -58,8 +58,13 @@ class AppFixtures extends Fixture
             $manager->persist($type);
 
         }
+        $city =['Lille','Tourcoing','Roubaix',	'Dunkerque','Villeneuve-d\'Ascq',	'Valenciennes',	'Wattrelos',	'Douai',
+'Marcq-en-Barœul',	'Cambrai',	'Maubeuge',	'Lambersart','Armentières',	'Grande-Synthe',	'Loos',	'Hazebrouck',
+'Coudekerque-Branche',	'La Madeleine',	'Croix',	'Mons-en-Barœul','Halluin',	'Wasquehal',	'Denain',	'Ronchin',
+'Hem',	'Faches-Thumesnil', 'Saint-Amand-les-Eaux',	'Sin-le-Noble','Haubourdin',	'Bailleul',	'Wattignies',	'Caudry',
+'Hautmont',	'Lys-lez-Lannoy',	'Roncq',	'Anzin','Mouvaux', 'Saint-André-lez-Lille',	'Raismes',	'Seclin'];
 
-        for($i=1 ;$i<= 100; $i++){
+        for($i=1 ;$i<= 200; $i++){
         $realEstate = new RealEstate();
         $type =$this->getReference('type-'.rand(0,count($typeNames)-1));
         $title= ucfirst($type->getName()).' ';
@@ -75,8 +80,8 @@ class AppFixtures extends Fixture
         $realEstate->setSold($faker->boolean(30));
         $realEstate->setSlug($faker->slug);
         $realEstate->setImage($faker->randomElement(['image1.jpg','image2.jpg','image3.jpg']));
-
         $realEstate->setOwner($this->getReference('user-'.rand(0, 9)));
+        $realEstate->setCity($faker->randomElement($city));
             $manager->persist($realEstate);
         }
 

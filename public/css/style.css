@@ -28,9 +28,7 @@ body{
     z-index:-1;
 }
 
-.card_accueil>img{
 
-}
 h5{
     text-align: center;
 }
@@ -40,4 +38,11 @@ h5{
     width: 100%;
     height: 15vw;
     object-fit: cover;
+}
+
+.imgscarossel{
+    object-fit: cover ;
+    object-position: center;
+    height: 80vh;
+    overflow: hidden;
 }

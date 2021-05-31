@@ -14,13 +14,12 @@
 
                              <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
                              <div class="form-group">
-                                 <label for="exampleFormControlSelect1">Example select</label>
+                                 <label for="exampleFormControlSelect1">Type de bien </label>
                              <select class="form-control mb-3" name="leBien">
-                                         <option>maison</option>
-                                         <option>immeuble</option>
+                                         <option>Maison</option>
                                          <option>appartement </option>
-                                         <option>garage</option>
-                                         <option>autres</option>
+                                         <option>Garage</option>
+                                         <option>Villa</option>
 
 
                                 {# <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
@@ -93,9 +92,10 @@
                          {% for c in les3produitsCarossels %}
                              <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
                                  <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ c.image) }}" >
+
                                  <div href="#" class="carousel-caption d-none d-md-block stretched-link">
-                                     <h5>.bonjour f</h5>
-                                     <p> dmzjmejf...</p>
+                                     <h5>{{ c.title }}</h5>
+                                     <p> {{ c.price }}</p>
                                  </div>
                              </div>
                          {% endfor %}

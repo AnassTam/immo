@@ -27,25 +27,28 @@
 
                     <a class="nav-link dropdown-toggle"  href="{{ path('real_estate_list') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Annonces</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('real_estate_list') }}">Maisons </a>
-                        <a class="dropdown-item" href="#">Appartements </a>
-                        <a class="dropdown-item" href="#">Immeubles</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Autres </a>
+
+                        <a class="dropdown-item" href=" {{ path('tous_les_biens_typeDuBien',{title:'maison'}) }} "> Maison</a>
+                        <a class="dropdown-item" href=" {{ path('tous_les_biens_typeDuBien',{title:'Appartement'}) }} "> Appartement</a>
+                        <a class="dropdown-item" href=" {{ path('tous_les_biens_typeDuBien',{title:'Villa'}) }} "> Villa</a>
+                        <a class="dropdown-item" href=" {{ path('tous_les_biens_typeDuBien',{title:'Studio'}) }} "> Studio</a>
+
+
                     </div>
+                </li>
+                <li class="nav-item {{ app.request.get('_route')=='homepage'? 'active' }}">
+                    <a class="nav-link" href="{{ path('real_estate_create') }}">Déposer une annonce </a>
                 </li>
             </ul>
         </div>
-        <div class="col-lg-2">
-            <a href="{{ path('real_estate_create') }}" class="btn ">Créer une annonce</a>
-        </div>
+
     </div>
             <form method="get" class="form-inline">
                 <input  id ="search" type="text" class="form-controle mr-2" placeholder="Recherche un bien...">
             </form>
-            <form method="get" class="form-inline">
+       {#   <form method="get" class="form-inline">
                 <input  id ="search" type="text" class="form-controle mr-2" placeholder="Recherche par ville ou region ...">
-            </form>
+            </form> #}
 
 
             <ul class="navbar-nav ml-auto">
@@ -74,9 +77,9 @@
                     </li>
 
                 {% endif %}
-                <li class ="nav-item active">
+                {#  <li class ="nav-item active">
                     <a class="btn btn-light" href = "{{ path('cart_index') }}"> Panier ({{ cart.count }}) </a>
-                </li>
+                </li #}
 
             </ul>
         </div>

@@ -2,25 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\RealEstateRepository;
+use App\Repository\LebienRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
- * @ORM\Entity(repositoryClass=RealEstateRepository::class)
+ * @ORM\Entity(repositoryClass=LebienRepository::class)
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"lebien" = "Lebien", "appartement" = "Appartement", "house" = "House"})
+ *
  */
-class RealEstate
+class Lebien
 {
-
-    public const sizes=[
-            1=>'Studio',
-            2=>'T2',
-            3=>'T3',
-            4=>'T4',
-            5=>'T5',
-
-        ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -28,106 +21,45 @@ class RealEstate
      */
     private $id;
 
-
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank
-     *
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(
-     *     min=15
-     * )
-     * @Assert\Regex(
-     *     pattern="/(meince|puree)/",
-     *     match=false,
-     *     message="Tu ne peux pas dire le m***"
-     * )
-     *
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
-     * @Assert\Range(
-     *     min = 50,
-     *     max=400
-     * )
-     *
-     */
-    private $surface;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
-     * Assert\Positive
-     */
-    private $price;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
-     */
-    private $rooms;
-
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $sold;
-
-    /**
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="realEstates")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="realEstates")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $owner;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $city;
-
+    private $statut;
 
     /**
      * @ORM\Column(type="integer")
      *
      */
-    private $referenceDuBien;
+    private $reference;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $localisation;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
+    private $piece;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $chambre;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
+    private $surface;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $standing;
 
     /**
@@ -216,34 +148,9 @@ class RealEstate
     private $visitevirtuelle;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $exposition;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $anneeConstruction;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $anneeRenovation;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $etage;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $charge;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $statut;
+    private $slug;
 
 
     public function getId(): ?int
@@ -251,159 +158,26 @@ class RealEstate
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getStatut(): ?string
     {
-        return $this->title;
+        return $this->statut;
     }
 
-    public function setTitle(string $title): self
+    public function setStatut(?string $statut): self
     {
-        $this->title = $title;
+        $this->statut = $statut;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getReference(): ?int
     {
-        return $this->description;
+        return $this->reference;
     }
 
-    public function setDescription(?string $description): self
+    public function setReference(int $reference): self
     {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSurface(): ?int
-    {
-        return $this->surface;
-    }
-
-    public function setSurface(int $surface): self
-    {
-        $this->surface = $surface;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getRooms(): ?int
-    {
-        return $this->rooms;
-    }
-    public function getDisplayableRooms():string
-    {
-        $sizes=[
-            1=>'Studio',
-            2=>'T2',
-            3=>'T3',
-            4=>'T4',
-            5=>'T5',
-        ];
-        return $sizes[$this->rooms];
-    }
-
-    public function setRooms(int $rooms): self
-    {
-        $this->rooms = $rooms;
-
-        return $this;
-    }
-
-    public function getSold(): ?bool
-    {
-        return $this->sold;
-    }
-
-    public function setSold(bool $sold): self
-    {
-        $this->sold = $sold;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
-
-    public function setType(?Type $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-
-
-    public function getReferenceDuBien(): ?int
-    {
-        return $this->referenceDuBien;
-    }
-
-    public function setReferenceduBien(int $referenceDuBien): self
-    {
-        $this->referenceDuBien = $referenceDuBien;
+        $this->reference = $reference;
 
         return $this;
     }
@@ -420,8 +194,29 @@ class RealEstate
         return $this;
     }
 
+    public function getLocalisation(): ?string
+    {
+        return $this->localisation;
+    }
 
+    public function setLocalisation(string $localisation): self
+    {
+        $this->localisation = $localisation;
 
+        return $this;
+    }
+
+    public function getPiece(): ?int
+    {
+        return $this->piece;
+    }
+
+    public function setPiece(?int $piece): self
+    {
+        $this->piece = $piece;
+
+        return $this;
+    }
 
     public function getChambre(): ?int
     {
@@ -435,7 +230,17 @@ class RealEstate
         return $this;
     }
 
+    public function getSurface(): ?int
+    {
+        return $this->surface;
+    }
 
+    public function setSurface(?int $surface): self
+    {
+        $this->surface = $surface;
+
+        return $this;
+    }
 
     public function getStanding(): ?string
     {
@@ -653,80 +458,16 @@ class RealEstate
         return $this;
     }
 
-    public function getExposition(): ?string
+    public function getSlug(): ?string
     {
-        return $this->exposition;
+        return $this->slug;
     }
 
-    public function setExposition(?string $exposition): self
+    public function setSlug(string $slug): self
     {
-        $this->exposition = $exposition;
+        $this->slug = $slug;
 
         return $this;
     }
-
-    public function getAnneeConstruction(): ?int
-    {
-        return $this->anneeConstruction;
-    }
-
-    public function setAnneeConstruction(?int $anneeConstruction): self
-    {
-        $this->anneeConstruction = $anneeConstruction;
-
-        return $this;
-    }
-
-    public function getAnneeRenovation(): ?int
-    {
-        return $this->anneeRenovation;
-    }
-
-    public function setAnneeRenovation(?int $anneeRenovation): self
-    {
-        $this->anneeRenovation = $anneeRenovation;
-
-        return $this;
-    }
-
-    public function getEtage(): ?string
-    {
-        return $this->etage;
-    }
-
-    public function setEtage(?string $etage): self
-    {
-        $this->etage = $etage;
-
-        return $this;
-    }
-
-    public function getCharge(): ?int
-    {
-        return $this->charge;
-    }
-
-    public function setCharge(?int $charge): self
-    {
-        $this->charge = $charge;
-
-        return $this;
-    }
-
-    public function getStatut(): ?string
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?string $statut): self
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-
-
-
 
 }

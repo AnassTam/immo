@@ -47,9 +47,79 @@ class RealEstateType extends AbstractType
                 ],
 
             ])
+            ->add('city')
+            ->add('referenceDuBien')
+            ->add('chambre')
+            ->add('standing')
+            ->add('etatDuBien')
+            ->add('vueDubien')
+            ->add('eauChaude')
+            ->add('chauffage')
+            ->add('styleDubien')
+            ->add('niveau')
+            ->add('ascenseur')
+            ->add('duplex')
+            ->add('loft')
+            ->add('dernierEtage')
+            ->add('avecPiscine')
+            ->add('balcon',ChoiceType::class, [
+                'label' => 'Balcon',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+
+            ])
+            ->add('garage',ChoiceType::class, [
+                'label' => 'Garage',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+
+            ])
+            ->add('parking',ChoiceType::class, [
+                'label' => 'Parking',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+
+            ])
+            ->add('personneHandicapee',ChoiceType::class, [
+                'label' => 'Accés au personne handicapée',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+
+            ])
+            ->add('investissementLocatif',ChoiceType::class, [
+                'label' => 'Investissement lacatif',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+
+            ])
+            ->add('visitevirtuelle',ChoiceType::class, [
+                'label' => 'Visite virtuelle',
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ],
+            ])
+            ->add('exposition')
+            ->add('anneeConstruction',)
+            ->add('anneeRenovation')
+            ->add('etage')
+            ->add('charge')
+            ->add('statut')
          ->add('image',FileType::class,[
             'mapped'=>false,
-    ]);
+         ]);
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

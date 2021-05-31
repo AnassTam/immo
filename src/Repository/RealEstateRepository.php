@@ -51,6 +51,41 @@ class RealEstateRepository extends ServiceEntityRepository
 
     }
 
+    // cherche aliatoirement 3 produit au hasard pour le caroussel
+    public function les3produitsCarossel(){
+        return  $this->createQueryBuilder('q')
+            ->Select('RAND() ')
+
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult();
+
+    }
+    public function findAllWiththeTypeDuBien($title,$surface,$price,$rooms)
+    {
+        // Select * From real_estate WHERE surface >50
+        $qb = $this->createQueryBuilder('r')
+        // ->where('r.surface > :surface')
+        //->andWhere('r.price <:price')
+        ->andWhere('r.title =:title')
+        ->setParameter('title',$title);
+        // ->setParameters('surface,$surface');
+
+        if(!empty($surface)){
+            $qb->andWhere('r.surface > :surface')->setParameter('surface',$surface);
+        }
+        if(!empty($price)){
+            $qb->andWhere('r.price < :price')->setParameter('price',$price);
+        }
+        if(!empty($rooms)){
+            $qb->andWhere('r.rooms = :rooms')->setParameter('rooms',$rooms);
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+
     // /**
     //  * @return RealEstate[] Returns an array of RealEstate objects
     //  */
@@ -79,4 +114,5 @@ class RealEstateRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

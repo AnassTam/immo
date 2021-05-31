@@ -52,11 +52,51 @@ class RealEstateController extends AbstractController
     }
 
     /**
+     * @Route("/tous-les-biens/{title}", name="tous_les_biens_typeDuBien")
+     */
+
+ public function recherchepartype($title, PaginatorInterface $paginator,Request $request): Response{
+
+     $sizes=[
+         1=>'Studio',
+         2=>'T2',
+         3=>'T3',
+         4=>'T4',
+         5=>'T5',
+     ];
+
+     $repository = $this->getDoctrine()->getRepository(RealEstate::class);
+     $properties = $repository->findAllWiththeTypeDuBien(
+         $request->get('title',$title),
+         $request->get('surface',0),
+         $request->get('price',9999999999999),
+         $request->get('size')
+     );
+
+
+     $pagination = $paginator->paginate(
+         $properties, /* query NOT result */
+         $request->query->getInt('page', 1), /*page number*/
+         6 /*limit per page*/
+     );
+
+     return $this->render('real_estate/index.html.twig',[
+         'sizes' =>$sizes,
+         'properties'=>$pagination,
+     ]);
+
+ }
+
+
+
+    /**
      * @Route("/nos-bien/{slug}_{id}", name="real_estate_show")
      */
 
     public function show(RealEstate $property)
 {
+
+
     return $this->render('real_estate/show.html.twig',[
         'property'=>$property,
         'title'=>$property->getTitle(),
@@ -79,7 +119,7 @@ class RealEstateController extends AbstractController
         if($form->isSubmitted()&& $form->isValid()){
             // Ici   ajout ds la base de donnée  si tt est bon
 
-            dump($realEstate);
+
             $slug = $slugger->slug($realEstate->getTitle());
             $realEstate->setSlug($slug);
 
@@ -155,7 +195,6 @@ class RealEstateController extends AbstractController
 
          if($this->getUser() !==$realEstate->getOwner()){
              throw $this->createAccessDeniedException(); // affiche erreur
-
          }
 
          $entityManager=$this->getDoctrine()->getManager();
@@ -165,7 +204,4 @@ class RealEstateController extends AbstractController
          return $this->redirectToRoute("real_estate_list");
 
      }
-
-
-
 }

@@ -8,7 +8,7 @@
 {% block page_base %}
     <div class="row my-4">
         <div class="col-lg-10">
-    <h1 class="text-center">Toutes les annonce</h1>
+    <h1 class="text-center">Toutes les annonces</h1>
     <div class="row">
         <div class="col-lg-3">
             <form action="" method="get">
@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <a href="{{ path('real_estate_show',{slug:property.slug, id:property.id}) }}">
-                                {{ property.title }}
+                                {{ property.title }}-réf : {{ property.referenceDuBien }}
 
                             </a>
                         </h5>
@@ -48,7 +48,7 @@
                             {{ property.surface }}m² - {{ property.rooms }} pièce(s)
                         </p>
                         <p class="card-text">
-                            Propriétaire: {{ property.owner.email|split('@')[0] }}
+                           {{ property.price}} euros.
                         </p>
 
                         {# condition pour verifier que l'utilistaeur est le propriaire de l'annonce  #}

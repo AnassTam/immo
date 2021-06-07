@@ -153,11 +153,6 @@ class RealEstate
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $styleDuBien;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $niveau;
 
     /**
@@ -178,12 +173,7 @@ class RealEstate
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $dernierEtage;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $avecPiscine;
+    private $piscine;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -210,10 +200,7 @@ class RealEstate
      */
     private $investissementLocatif;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $visitevirtuelle;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -244,6 +231,31 @@ class RealEstate
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $statut;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeTransaction::class, inversedBy="realEstate")
+     */
+    private $typeTransaction;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $statutAnnonce;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adressePropritaire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $villeAdressePropritaidre;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $styleDuBien;
 
 
     public function getId(): ?int
@@ -497,17 +509,7 @@ class RealEstate
         return $this;
     }
 
-    public function getStyleDuBien(): ?string
-    {
-        return $this->styleDuBien;
-    }
 
-    public function setStyleDuBien(?string $styleDuBien): self
-    {
-        $this->styleDuBien = $styleDuBien;
-
-        return $this;
-    }
 
     public function getNiveau(): ?string
     {
@@ -557,26 +559,14 @@ class RealEstate
         return $this;
     }
 
-    public function getDernierEtage(): ?bool
+    public function getPiscine(): ?bool
     {
-        return $this->dernierEtage;
+        return $this->piscine;
     }
 
-    public function setDernierEtage(?bool $dernierEtage): self
+    public function setPiscine(?bool $piscine): self
     {
-        $this->dernierEtage = $dernierEtage;
-
-        return $this;
-    }
-
-    public function getAvecPiscine(): ?bool
-    {
-        return $this->avecPiscine;
-    }
-
-    public function setAvecPiscine(?bool $avecPiscine): self
-    {
-        $this->avecPiscine = $avecPiscine;
+        $this->piscine = $piscine;
 
         return $this;
     }
@@ -641,17 +631,9 @@ class RealEstate
         return $this;
     }
 
-    public function getVisitevirtuelle(): ?bool
-    {
-        return $this->visitevirtuelle;
-    }
 
-    public function setVisitevirtuelle(?bool $visitevirtuelle): self
-    {
-        $this->visitevirtuelle = $visitevirtuelle;
 
-        return $this;
-    }
+
 
     public function getExposition(): ?string
     {
@@ -721,6 +703,66 @@ class RealEstate
     public function setStatut(?string $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getTypeTransaction(): ?TypeTransaction
+    {
+        return $this->typeTransaction;
+    }
+
+    public function setTypeTransaction(?TypeTransaction $typeTransaction): self
+    {
+        $this->typeTransaction = $typeTransaction;
+
+        return $this;
+    }
+
+    public function getStatutAnnonce(): ?bool
+    {
+        return $this->statutAnnonce;
+    }
+
+    public function setStatutAnnonce(bool $statutAnnonce): self
+    {
+        $this->statutAnnonce = $statutAnnonce;
+
+        return $this;
+    }
+
+    public function getAdressePropritaire(): ?string
+    {
+        return $this->adressePropritaire;
+    }
+
+    public function setAdressePropritaire(?string $adressePropritaire): self
+    {
+        $this->adressePropritaire = $adressePropritaire;
+
+        return $this;
+    }
+
+    public function getVilleAdressePropritaidre(): ?string
+    {
+        return $this->villeAdressePropritaidre;
+    }
+
+    public function setVilleAdressePropritaidre(?string $villeAdressePropritaidre): self
+    {
+        $this->villeAdressePropritaidre = $villeAdressePropritaidre;
+
+        return $this;
+    }
+
+    public function getStyleDuBien(): ?string
+    {
+        return $this->styleDuBien;
+    }
+
+    public function setStyleDuBien(string $styleDuBien): self
+    {
+        $this->styleDuBien = $styleDuBien;
 
         return $this;
     }

@@ -46,8 +46,6 @@ class AppFixtures extends Fixture
             'Hautmont',	'Lys-lez-Lannoy',	'Roncq',	'Anzin','Mouvaux', 'Saint-André-lez-Lille',	'Raismes',	'Seclin'];
 
 
-
-//--------------------------------------------------------------------
            //creation des utilisateurs user
         for ($i = 1; $i<= 9; $i++){
             $user = new User();

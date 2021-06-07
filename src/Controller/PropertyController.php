@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PropertyController extends AbstractController
+
 {
 private $properties =[
 ['title'=> 'Maison avec piscine'],

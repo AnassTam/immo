@@ -21,7 +21,6 @@ class RealEstate
             5=>'T5',
 
         ];
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -271,7 +270,6 @@ class RealEstate
 
     public function setTitle(string $title): self
     {
-
         $this->title = $title;
 
         return $this;
@@ -511,6 +509,8 @@ class RealEstate
         return $this;
     }
 
+
+
     public function getNiveau(): ?string
     {
         return $this->niveau;
@@ -630,6 +630,10 @@ class RealEstate
 
         return $this;
     }
+
+
+
+
 
     public function getExposition(): ?string
     {

@@ -48,7 +48,6 @@ class RealEstateType extends AbstractType
 
             ])
             ->add('city')
-            ->add('referenceDuBien')
             ->add('chambre')
             ->add('standing')
             ->add('etatDuBien')
@@ -60,8 +59,7 @@ class RealEstateType extends AbstractType
             ->add('ascenseur')
             ->add('duplex')
             ->add('loft')
-            ->add('dernierEtage')
-            ->add('avecPiscine')
+            ->add('piscine')
             ->add('balcon',ChoiceType::class, [
                 'label' => 'Balcon',
                 'choices' => [
@@ -102,15 +100,9 @@ class RealEstateType extends AbstractType
                 ],
 
             ])
-            ->add('visitevirtuelle',ChoiceType::class, [
-                'label' => 'Visite virtuelle',
-                'choices' => [
-                    'Non' => false,
-                    'Oui' => true,
-                ],
-            ])
+
             ->add('exposition')
-            ->add('anneeConstruction',)
+            ->add('anneeConstruction')
             ->add('anneeRenovation')
             ->add('etage')
             ->add('charge')

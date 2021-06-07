@@ -2,40 +2,144 @@
 
 {% block page_base %}
     <h1 class="text-center my-4">Ajouter une annonce</h1>
+    {{ form_start(realEstateForm) }}
+    <div class="row">
+        <div class="container">
+            <h2>Toggleable Tabs</h2>
+            <br>
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-fill" role="tablist">
+
+                <li class="nav-item ">
+                    <a class="nav-link active" data-toggle="tab" href="#general">Général</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#informations">Informations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#surfaces">Surfaces</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#prestations">Prestation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#proximite">Proximité</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#reglementation">Réglementation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#comentaire">Commentaire</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="general" class="container tab-pane active"><br>
+                    <h3>Général</h3>
+                    <div class="col-lg-6">
+                        {{ form_label(realEstateForm.title, 'Titre') }}
+                        {{ form_widget(realEstateForm.title) }}
+                    </div>
+                    {{ form_row(realEstateForm.type) }}
+                    {{ form_row(realEstateForm.rooms) }}
+                    {{ form_row(realEstateForm.price) }}
+                    {{ form_row(realEstateForm.sold) }}
+                    {{ form_row(realEstateForm.city) }}
+                    {{ form_row(realEstateForm.statut) }}
+
+                    </div>
+
+
+                <div id="informations" class="container tab-pane fade"><br>
+                    <h3>Informations</h3>
+
+                    {{ form_row(realEstateForm.chambre) }}
+                    {{ form_row(realEstateForm.niveau) }}
+                    {{ form_row(realEstateForm.standing) }}
+                    {{ form_row(realEstateForm.exposition) }}
+                    {{ form_row(realEstateForm.vueDubien) }}
+                    {{ form_row(realEstateForm.eauChaude) }}
+                    {{ form_row(realEstateForm.chauffage) }}
+                    {{ form_row(realEstateForm.etatDuBien) }}
+                    {{ form_row(realEstateForm.anneeConstruction) }}
+                    {{ form_row(realEstateForm.anneeRenovation)}}
+                    {{ form_row(realEstateForm.styleDubien)}}
+                    {{ form_row(realEstateForm.charge)}}
+                    {{ form_row(realEstateForm.etage)}}
+                </div>
+            <div id="surfaces" class="container tab-pane fade"><br>
+                    <h3>Surfaces</h3>
+                {{ form_row(realEstateForm.ascenseur) }}
+                {{ form_row(realEstateForm.piscine) }}
+                {{ form_row(realEstateForm.balcon) }}
+                {{ form_row(realEstateForm.garage) }}
+                {{ form_row(realEstateForm.surface) }}
+                {{ form_row(realEstateForm.parking) }}
+
+
+                </div>
+            <div id="prestations" class="container tab-pane fade"><br>
+                    <h3>Proximité</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                </div>
+                <div id="prestation" class="container tab-pane fade"><br>
+                    <h3>Prestation</h3>
+                    {{ form_row(realEstateForm.personneHandicapee) }}
+                    {{ form_row(realEstateForm.investissementLocatif) }}
+                    {{ form_row(realEstateForm.duplex) }}
+                    {{ form_row(realEstateForm.loft) }}
+                </div>
+            <div id="reglementation" class="container tab-pane fade"><br>
+                    <h3>Réglementation</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                </div>
+            <div id="comentaire" class="container tab-pane fade"><br>
+                    <h3>Commentaire</h3>
+                {{ form_row(realEstateForm.description) }}
+
+                </div>
+            <div id="photos" class="container tab-pane fade"><br>
+                    <h3>Photos</h3>
+                {{ form_row(realEstateForm.image) }}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 
     <div class="row" style="background-color: #F8F9FA">
         <div class="col-lg-8 offset-lg-2">
 
-            {{ form_start(realEstateForm) }}
+
             <div class="row">
+
                 <div class="col-lg-6">
-                    {{ form_label(realEstateForm.title, 'Titre') }}
-                    {{ form_widget(realEstateForm.title) }}
+
+
                 </div>
                 <div class="col-lg-6">
 
-                    {{ form_row(realEstateForm.description) }}
                 </div>
                 <div class="col-lg-6">
-                    {{ form_row(realEstateForm.surface) }}
+
                 </div>
                 <div class="col-lg-6">
-                    {{ form_row(realEstateForm.price) }}
+
                 </div>
-                <div class="col-lg-6">
-                    {{ form_row(realEstateForm.rooms) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.type) }}
-                </div>
+
                 <div class="col-lg-3">
                     <div class="pt-1">
-                        {{ form_row(realEstateForm.sold) }}
+
                     </div>
                 </div>
             </div>
-
-
             {{ form_widget(realEstateForm) }}
             <button class="btn btn-primary" formnovalidate>Ajouter</button>
             {{ form_end(realEstateForm) }}

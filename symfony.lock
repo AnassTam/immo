@@ -410,9 +410,6 @@
     "symfony/process": {
         "version": "v5.2.3"
     },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
-    },
     "symfony/property-access": {
         "version": "v5.2.3"
     },

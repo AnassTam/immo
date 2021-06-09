@@ -3,7 +3,7 @@
 namespace App\Entity;
 class AccueilSearch{
 
-  /@
+
     private $lieu;
     private $typeBien;
     private $minSurface;

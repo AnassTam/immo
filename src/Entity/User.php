@@ -43,6 +43,41 @@ class User implements UserInterface
      */
     private $realEstates;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nomUser;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prenomUser;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $datenaissance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $villeUser;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paysUser;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pieceIdentiteUser;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $justificatifDomicileUser;
+
     public function __construct()
     {
         $this->realEstates = new ArrayCollection();
@@ -155,6 +190,90 @@ class User implements UserInterface
                 $realEstate->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNomUser(): ?string
+    {
+        return $this->nomUser;
+    }
+
+    public function setNomUser(?string $nomUser): self
+    {
+        $this->nomUser = $nomUser;
+
+        return $this;
+    }
+
+    public function getPrenomUser(): ?string
+    {
+        return $this->prenomUser;
+    }
+
+    public function setPrenomUser(?string $prenomUser): self
+    {
+        $this->prenomUser = $prenomUser;
+
+        return $this;
+    }
+
+    public function getDatenaissance(): ?\DateTimeInterface
+    {
+        return $this->datenaissance;
+    }
+
+    public function setDatenaissance(?\DateTimeInterface $datenaissance): self
+    {
+        $this->datenaissance = $datenaissance;
+
+        return $this;
+    }
+
+    public function getVilleUser(): ?string
+    {
+        return $this->villeUser;
+    }
+
+    public function setVilleUser(?string $villeUser): self
+    {
+        $this->villeUser = $villeUser;
+
+        return $this;
+    }
+
+    public function getPaysUser(): ?string
+    {
+        return $this->paysUser;
+    }
+
+    public function setPaysUser(?string $paysUser): self
+    {
+        $this->paysUser = $paysUser;
+
+        return $this;
+    }
+
+    public function getPieceIdentiteUser(): ?string
+    {
+        return $this->pieceIdentiteUser;
+    }
+
+    public function setPieceIdentiteUser(?string $pieceIdentiteUser): self
+    {
+        $this->pieceIdentiteUser = $pieceIdentiteUser;
+
+        return $this;
+    }
+
+    public function getJustificatifDomicileUser(): ?string
+    {
+        return $this->justificatifDomicileUser;
+    }
+
+    public function setJustificatifDomicileUser(?string $justificatifDomicileUser): self
+    {
+        $this->justificatifDomicileUser = $justificatifDomicileUser;
 
         return $this;
     }

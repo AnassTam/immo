@@ -34,7 +34,7 @@ class RealEstateController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
         $properties = $repository->findAllWiththeFilters(
             $request->get('surface',0),
-            $request->get('price',9999999999999),
+            $request->get('price',9999999),
             $request->get('size')
         );
 
@@ -69,7 +69,7 @@ class RealEstateController extends AbstractController
      $properties = $repository->findAllWiththeTypeDuBien(
          $request->get('title',$title),
          $request->get('surface',0),
-         $request->get('price',9999999999999),
+         $request->get('price',9999999),
          $request->get('size')
      );
 

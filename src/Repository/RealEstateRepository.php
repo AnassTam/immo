@@ -84,7 +84,29 @@ class RealEstateRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
 
     }
+    public function searchPageHome($city,$surface,$price){
 
+        // Select * From real_estate WHERE surface >50
+        $qb = $this->createQueryBuilder('r')
+            // ->where('r.surface > :surface')
+            //->andWhere('r.price <:price')
+            ->andWhere('r.city =:city')
+            ->setParameter('city',$city);
+        // ->setParameters('surface,$surface');
+
+        if(!empty($surface)){
+            $qb->andWhere('r.surface > :surface')->setParameter('surface',$surface);
+        }
+        if(!empty($price)){
+            $qb->andWhere('r.price < :price')->setParameter('price',$price);
+        }
+        if(!empty($type)){
+            $qb->andWhere('r.type = :type')->setParameter('type',$type);
+        }
+
+        return $qb->getQuery()->getResult();
+
+    }
 
     // /**
     //  * @return RealEstate[] Returns an array of RealEstate objects

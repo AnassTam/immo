@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ImagesSupp;
 use App\Entity\RealEstate;
 use App\Form\RealEstateType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,37 +56,39 @@ class RealEstateController extends AbstractController
      * @Route("/tous-les-biens/{title}", name="tous_les_biens_typeDuBien")
      */
 
- public function recherchepartype($title, PaginatorInterface $paginator,Request $request): Response{
+    public function recherchepartype($title, PaginatorInterface $paginator,Request $request): Response{
 
-     $sizes=[
-         1=>'Studio',
-         2=>'T2',
-         3=>'T3',
-         4=>'T4',
-         5=>'T5',
-     ];
+        $sizes=[
+            1=>'Studio',
+            2=>'T2',
+            3=>'T3',
+            4=>'T4',
+            5=>'T5',
+        ];
 
-     $repository = $this->getDoctrine()->getRepository(RealEstate::class);
-     $properties = $repository->findAllWiththeTypeDuBien(
-         $request->get('title',$title),
-         $request->get('surface',0),
-         $request->get('price',9999999),
-         $request->get('size')
-     );
+        $repository = $this->getDoctrine()->getRepository(RealEstate::class);
+        $properties = $repository->findAllWiththeTypeDuBien(
+            $request->get('title',$title),
+            $request->get('surface',0),
+            $request->get('price',9999999),
+            $request->get('size')
+        );
 
 
-     $pagination = $paginator->paginate(
-         $properties, /* query NOT result */
-         $request->query->getInt('page', 1), /*page number*/
-         6 /*limit per page*/
-     );
+        $pagination = $paginator->paginate(
+            $properties, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
 
-     return $this->render('real_estate/index.html.twig',[
-         'sizes' =>$sizes,
-         'properties'=>$pagination,
-     ]);
+        return $this->render('real_estate/index.html.twig',[
+            'sizes' =>$sizes,
+            'properties'=>$pagination,
+        ]);
 
- }
+    }
+
+
 
 
 
@@ -94,16 +97,16 @@ class RealEstateController extends AbstractController
      */
 
     public function show(RealEstate $property)
-{
+    {
 
 
-    return $this->render('real_estate/show.html.twig',[
-        'property'=>$property,
-        'title'=>$property->getTitle(),
-    ]);
+        return $this->render('real_estate/show.html.twig',[
+            'property'=>$property,
+            'title'=>$property->getTitle(),
+        ]);
 
 
-}
+    }
 
 
     /**
@@ -119,20 +122,33 @@ class RealEstateController extends AbstractController
         if($form->isSubmitted()&& $form->isValid()){
             // Ici   ajout ds la base de donnée  si tt est bon
 
+            //On récupère les images transmises
+            $images =$form->get('image')->getData();
+
+            // On boucle  sur es imagesSupp
+            foreach ($images as $image){
+                //On génère un nouveau fichier
+                $fichier =md5(uniqid()) .  '.' .$image->guessExtension();
+                //On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('upload_directory'),
+                    $fichier
+                );
+                // On stocke l 'imageSupp dans la base de données( le nom
+                $img = new ImagesSupp();
+                $img->setName($fichier);
+                $realEstate->addImagesSupp($img);
+
+            }
 
             $slug = $slugger->slug($realEstate->getTitle());
             $realEstate->setSlug($slug);
 
-            //telechargement de l image
 
-            $image=$form->get('image')->getData();
-            $fileName=uniqid().'.'.$image->guessExtension();
-            $image->move($this->getParameter('upload_directory'),$fileName);
-            $realEstate->setImage($fileName);
 
 
             // je relie  l'annonce à l'utilisateur qui est connecté
-             $realEstate->setOwner($this->getUser());
+            $realEstate->setOwner($this->getUser());
 
             //Je dois ajouter  l'objet dans bdd
             $entityManager = $this->getDoctrine()->getManager();
@@ -146,62 +162,62 @@ class RealEstateController extends AbstractController
 
         return  $this ->render('real_estate/create.html.twig',[
             'realEstateForm'=>$form->createView()
-    ]);
+        ]);
     }
     /**
      * @route("/nos-biens/modifier/{id}", name="real_estate_edit")
      */
-     public function edit(Request $request, RealEstate $realEstate){
+    public function edit(Request $request, RealEstate $realEstate){
 
-         // Condition de voir si l'utilisateur a bien le droit   de modifier l'annonce$
+        // Condition de voir si l'utilisateur a bien le droit   de modifier l'annonce$
 
-         if($this->getUser() !==$realEstate->getOwner()){
-             throw $this->createAccessDeniedException(); // affiche erreur
+        if($this->getUser() !==$realEstate->getOwner()){
+            throw $this->createAccessDeniedException(); // affiche erreur
 
-         }
+        }
 
 
-         $form = $this->createForm(RealEstateType::class,$realEstate);
-         $form->handLeREquest($request);
-         if($form->isSubmitted() && $form->isValid()) {
-             // Modification de l 'image
+        $form = $this->createForm(RealEstateType::class,$realEstate);
+        $form->handLeREquest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            // Modification de l 'image
 
-             $image=$form->get('image')->getData();
-             if ($image) {
+            $image=$form->get('image')->getData();
+            if ($image) {
 
-             $image = $form->get('image')->getData();
-             $fileName = uniqid() . '.' . $image->guessExtension();
-             $image->move($this->getParameter('upload_directory'), $fileName);
-             $realEstate->setImage($fileName);
-         }
+                $image = $form->get('image')->getData();
+                $fileName = uniqid() . '.' . $image->guessExtension();
+                $image->move($this->getParameter('upload_directory'), $fileName);
+                $realEstate->setImage($fileName);
+            }
 
-             // après la modif
-             $this->getDoctrine()->getManager()->flush();
-             $this->addFlash('success','l\'annonce a été bien modifié');
+            // après la modif
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success','l\'annonce a été bien modifié');
 
-             return $this->redirectToRoute('real_estate_list');
-         }
-         return $this->render('real_estate/edit.html.twig',[
-             'realEstateForm'=> $form->createView(),
-             'realEstate' => $realEstate,
-         ]);
+            return $this->redirectToRoute('real_estate_list');
+        }
+        return $this->render('real_estate/edit.html.twig',[
+            'realEstateForm'=> $form->createView(),
+            'realEstate' => $realEstate,
+        ]);
 
-     }
+    }
     /**
      * @route("/nos-biens/supprimer/{id}", name="real_estate_delete")
      */
-     public function delete(RealEstate $realEstate){
-         // Condition de voir si l'utilisateur a bien le droit   de supprimer l'annonce$
+    public function delete(RealEstate $realEstate){
+        // Condition de voir si l'utilisateur a bien le droit   de supprimer l'annonce$
 
-         if($this->getUser() !==$realEstate->getOwner()){
-             throw $this->createAccessDeniedException(); // affiche erreur
-         }
+        if($this->getUser() !==$realEstate->getOwner()){
+            throw $this->createAccessDeniedException(); // affiche erreur
+        }
 
-         $entityManager=$this->getDoctrine()->getManager();
-         $entityManager->remove($realEstate);
-         $entityManager ->flush();
-         $this->addFlash('danger','l\'Annonce a été  supprimé');
-         return $this->redirectToRoute("real_estate_list");
+        $entityManager=$this->getDoctrine()->getManager();
+        $entityManager->remove($realEstate);
+        $entityManager ->flush();
+        $this->addFlash('danger','l\'Annonce a été  supprimé');
+        return $this->redirectToRoute("real_estate_list");
 
-     }
+    }
 }

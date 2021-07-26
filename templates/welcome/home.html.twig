@@ -11,7 +11,6 @@
                      <div class="col-md-3 offset-md-3 bg-light h-75 pt-5 ">
 <h3>Chercher un bien</h3>
                          <form action="" method="get">
-
                              <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
                              <div class="form-group">
                                  <label for="exampleFormControlSelect1">Type de bien </label>
@@ -126,7 +125,9 @@
                                  {% for p in products  %}
                                      <div class="col-sm">
                                          <div class="card">
-                                             <img class="card-img-top"  src="{{ asset('img/uploads/' ~ p.image) }}" alt="Card image cap">
+                                             {% set image = p.imagesSupps|first %}
+                                             <img class="card-img-top"  src="{{ asset('img/uploads/' ~ image.name) }}" alt="Card image cap">
+
                                              <div class="card-body">
                                                  <a href="{{ path('real_estate_show',{slug:p.slug, id:p.id}) }}" class="stretched-link"><h4 class="card-title">{{ p.title}}.réf: {{ p.id }}</h4></a>
                                                  <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
@@ -152,6 +153,27 @@
 
      </div>
 
+
+
+
+     {#
+     <div class="col-lg-3">
+         <form action="" method="get">
+             <input type="text" class="form-control mb-3" name="city"  placeholder="lieu" value="{{ app.request.get('city') }}">
+             <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
+             <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
+             <select class="form-control mb-3" name="type">
+                 <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Type de bien </option>
+                 {% for type in types %}
+                     <option value="{{ loop.index }}" {{ loop.index ==app.request.get('type')?'selected' }}>{{ type }}</option>
+                 {% endfor %}
+
+             </select> #
+             <button class="btn btn-primary btn-block ">Filtrer </button>
+         </form>
+
+     </div>
+    #}
 
 
  {% endblock %}

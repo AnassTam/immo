@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RealEstateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,13 +16,13 @@ class RealEstate
 {
 
     public const sizes=[
-            1=>'Studio',
-            2=>'T2',
-            3=>'T3',
-            4=>'T4',
-            5=>'T5',
+        1=>'Studio',
+        2=>'T2',
+        3=>'T3',
+        4=>'T4',
+        5=>'T5',
 
-        ];
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -636,6 +638,22 @@ class RealEstate
      * @ORM\Column(type="integer", nullable=true)
      */
     private $taxeHabitation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ImagesSupp::class, mappedBy="realEstate", orphanRemoval=true, cascade={"persist"})
+     */
+    private $imagesSupps;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DocumentsVendeur::class, mappedBy="realEstate")
+     */
+    private $documentsVendeurs;
+
+    public function __construct()
+    {
+        $this->imagesSupps = new ArrayCollection();
+        $this->documentsVendeurs = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -2058,6 +2076,67 @@ class RealEstate
 
         return $this;
     }
+
+    /**
+     * @return Collection|ImagesSupp[]
+     */
+    public function getImagesSupps(): Collection
+    {
+        return $this->imagesSupps;
+    }
+
+    public function addImagesSupp(ImagesSupp $imagesSupp): self
+    {
+        if (!$this->imagesSupps->contains($imagesSupp)) {
+            $this->imagesSupps[] = $imagesSupp;
+            $imagesSupp->setRealEstate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImagesSupp(ImagesSupp $imagesSupp): self
+    {
+        if ($this->imagesSupps->removeElement($imagesSupp)) {
+            // set the owning side to null (unless already changed)
+            if ($imagesSupp->getRealEstate() === $this) {
+                $imagesSupp->setRealEstate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocumentsVendeur[]
+     */
+    public function getDocumentsVendeurs(): Collection
+    {
+        return $this->documentsVendeurs;
+    }
+
+    public function addDocumentsVendeur(DocumentsVendeur $documentsVendeur): self
+    {
+        if (!$this->documentsVendeurs->contains($documentsVendeur)) {
+            $this->documentsVendeurs[] = $documentsVendeur;
+            $documentsVendeur->setRealEstate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocumentsVendeur(DocumentsVendeur $documentsVendeur): self
+    {
+        if ($this->documentsVendeurs->removeElement($documentsVendeur)) {
+            // set the owning side to null (unless already changed)
+            if ($documentsVendeur->getRealEstate() === $this) {
+                $documentsVendeur->setRealEstate(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
 

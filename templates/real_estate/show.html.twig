@@ -2,147 +2,194 @@
 
 {% block page_base %}
     <div class="container">
-    <div class="row py-4" xmlns="http://www.w3.org/1999/html">
-       <div class="col-log-6 divImg">
-           {% if property.sold %}
-               <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
-           {% endif %}
-           <img src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" class="card-img">
-       </div>
-       <div class="col-log-6">
-           <h1> {{ title }}</h1>
-           <p class="property-price text-primary">
-               <strong>{{ property.price }} € </strong>
-               </p>
-           <a href="{{ path('contact_vendeur') }}" class="btn  btn-primary btn-block"> Contacter le vendeur </a>
+        <div class="row py-4" xmlns="http://www.w3.org/1999/html">
+            <div class="col-log-6 divImg">
+                {% if property.sold %}
+                    <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
+                {% endif %}
+                <div class="row  justify-content-center mt-1 ">
+                    <div class="col-8">
 
-       </div>
-   </div>
-
-    <div class="py-4">
-        <div class="mb-4">
-            {{ property.description }}
-        </div>
+                            <h1>Vente {{ property.type.name}} {{ property.surface }}m² {{ property.city }} </h1>
+                            <div class="row">
+                                <div><h2> {{ property.price }} €</h2></div>
+                                <div>  Réf: {{ property.referenceDuBien }}</div>
 
 
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <table class="  jus table table-striped">
+                        </div>
+                    </div>
+                        <div class="card">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    {% for i in 1.. (property.imagesSupps|length -1 ) %}
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"></li>
+                                    {% endfor %}
 
 
-                    <tbody>
-                    <tr>
-                        <td>surface habitable:</td>
-                        <td>{{ property.surface }}m²</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre de pièces:</td>
-                        <td>{{ property.rooms }} ({{ property.displayableRooms }})</td>
-                    </tr>
-                    <tr>
-                        <td>Type de bien: </td>
-                        <td>{{ property.type.name |capitalize}}</td>
-                    </tr>
-                    <tr>
-                        <td>Localisation:</td>
-                        <td>{{ property.city }}</td>
-                    </tr>
-                    <tr>
-                        <td>Reference du bien: </td>
-                        <td>{{ property.referenceDuBien }}</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre de chambre: </td>
-                        <td>{{ property.chambre }}</td>
-                    </tr>
+                                </ol>
 
-                    {% if property.type.name   == "Appartement" %}
-                        {% include "real_estate/_showAppartement.html.twig" %}
-                    {%  elseif property.type.name   == "Maison" %}
-                        {% include "real_estate/_showMaison.html.twig"  %}
-                    {% endif %}
+                                <div class="carousel-inner">
+                                    {% for image in property.imagesSupps %}
+                                        <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
+                                            <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ image.name) }}" >
+
+                                            <div href="#" class="carousel-caption d-none d-md-block stretched-link">
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
 
 
 
 
-                    <tr>
-                        <td>Standing:</td>
-                        <td>{{ property.standing}}</td>
-                    </tr>
-                    <tr>
-                        <td>Etat du bien: </td>
-                        <td>{{ property.referenceDuBien }}</td>
-                    </tr>
-                    <tr>
-                        <td>La vue : </td>
-                        <td>{{ property.vueDubien }}</td>
-                    </tr>
-                    <tr>
-                        <td>L'eau chaude : </td>
-                        <td>{{ property.eauchaude }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le chauffage : </td>
-                        <td>{{ property.chauffage }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le style : </td>
-                        <td>{{ property.styleDuBien }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le niveau : </td>
-                        <td>{{ property.niveau }}</td>
-                    </tr>
-                    <tr>
-                        <td>L'ascenseur': </td>
-                        <td>{{ property.ascenseur }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le duplex : </td>
-                        <td>{{ property.duplex }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le loft : </td>
-                        <td>{{ property.loft }}</td>
-                    </tr>
-                    <tr>
-                        <td>Avec piscine : </td>
-                        <td>{{ property.piscine }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le balcon : </td>
-                        <td>{{ property.balcon }}</td>
-                    </tr>
-                    <tr>
-                        <td>Le garage : </td>
-                        <td>{{ property.garage}}</td>
-                    </tr>
-                    <tr>
-                        <td>Le parking : </td>
-                        <td>{{ property.parking }}</td>
-                    </tr>
-                    <tr>
-                        <td>Accés aux handicapés: </td>
-                        <td>{{ property.personneHandicapee }}</td>
-                    </tr>
-                    <tr>
-                        <td>L'invistissement locatif : </td>
-                        <td>{{ property.investissementLocatif }}</td>
-                    </tr>
-
-
-
-
-
-
-
-                    </tbody>
-                </table>
-
+{# fin  de carossel #}
+            </div>
+            <div class="col-log-6">
+                <h1> {{ title }}</h1>
+                <p class="property-price text-primary">
+                    <strong>{{ property.price }} € </strong>
+                </p>
+                <a href="{{ path('contact_vendeur') }}" class="btn  btn-primary btn-block"> Contacter le vendeur </a>
 
             </div>
         </div>
-    </div>
+
+        <div class="py-4">
+            <div class="mb-4">
+                {{ property.description }}
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <table class="  jus table table-striped">
+
+
+                        <tbody>
+                        <tr>
+                            <td>surface habitable:</td>
+                            <td>{{ property.surface }}m²</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre de pièces:</td>
+                            <td>{{ property.rooms }} ({{ property.displayableRooms }})</td>
+                        </tr>
+
+                        <tr>
+                            <td>Localisation:</td>
+                            <td>{{ property.city }}</td>
+                        </tr>
+                        <tr>
+                            <td>Reference du bien: </td>
+                            <td>{{ property.referenceDuBien }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre de chambre: </td>
+                            <td>{{ property.chambre }}</td>
+                        </tr>
+
+                        {% if property.type.name   == "Appartement" %}
+                            {% include "real_estate/_showAppartement.html.twig" %}
+                        {%  elseif property.type.name   == "Maison" %}
+                            {% include "real_estate/_showMaison.html.twig"  %}
+                        {% endif %}
+
+
+
+
+                        <tr>
+                            <td>Standing:</td>
+                            <td>{{ property.standing}}</td>
+                        </tr>
+                        <tr>
+                            <td>Etat du bien: </td>
+                            <td>{{ property.referenceDuBien }}</td>
+                        </tr>
+                        <tr>
+                            <td>La vue : </td>
+                            <td>{{ property.vueDubien }}</td>
+                        </tr>
+                        <tr>
+                            <td>L'eau chaude : </td>
+                            <td>{{ property.eauchaude }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le chauffage : </td>
+                            <td>{{ property.chauffage }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le style : </td>
+                            <td>{{ property.styleDuBien }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le niveau : </td>
+                            <td>{{ property.niveau }}</td>
+                        </tr>
+                        <tr>
+                            <td>L'ascenseur': </td>
+                            <td>{{ property.ascenseur }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le duplex : </td>
+                            <td>{{ property.duplex }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le loft : </td>
+                            <td>{{ property.loft }}</td>
+                        </tr>
+                        <tr>
+                            <td>Avec piscine : </td>
+                            <td>{{ property.piscine }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le balcon : </td>
+                            <td>{{ property.balcon }}</td>
+                        </tr>
+                        <tr>
+                            <td>Le garage : </td>
+                            <td>{{ property.garage}}</td>
+                        </tr>
+                        <tr>
+                            <td>Le parking : </td>
+                            <td>{{ property.parking }}</td>
+                        </tr>
+                        <tr>
+                            <td>Accés aux handicapés: </td>
+                            <td>{{ property.personneHandicapee }}</td>
+                        </tr>
+                        <tr>
+                            <td>L'invistissement locatif : </td>
+                            <td>{{ property.investissementLocatif }}</td>
+                        </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
     </div>
 
 

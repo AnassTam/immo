@@ -28,7 +28,6 @@ class RealEstateType extends AbstractType
                 ]
             ])
             ->add('price')
-
             ->add('rooms', ChoiceType::class, [
                 'choices' => [
                     'Studio' => 1,
@@ -49,7 +48,6 @@ class RealEstateType extends AbstractType
                 ],
 
             ])
-
             ->add('city')
             ->add('chambre')
             ->add('standing')
@@ -59,8 +57,6 @@ class RealEstateType extends AbstractType
             ->add('chauffage')
             ->add('niveau')
             ->add('ascenseur')
-
-
             ->add('piscine')
             ->add('balcon')
             ->add('garage')
@@ -71,7 +67,6 @@ class RealEstateType extends AbstractType
             ->add('etage')
             ->add('charge')
             ->add('statut')
-
             ->add('adresseProprietaire')
             ->add('villeAdresseProprietaire')
             ->add('styleDuBien')
@@ -81,8 +76,6 @@ class RealEstateType extends AbstractType
             ->add('airConditionne')
             ->add('stores')
             ->add('referenceDuBien')
-
-
             ->add('videSanitaire')
             ->add('doubleVitrage')
             ->add('aspirateurCentralisee')
@@ -161,9 +154,25 @@ class RealEstateType extends AbstractType
             ->add('taxeFonciere')
             ->add('taxeHabitation')
             ->add('typeTransaction')
-            ->add('image', FileType::class, [
-                'mapped' => false,
-            ]);
+            //->add('image', FileType::class, [
+               // 'label'=>'Ajouter  d\'autres images',
+              //  'multiple'=>true,
+              //  'mapped'=>false,
+              //  'required'=>false
+           // ])
+            ->add('documentsVendeur', FileType::class, [
+                'label'=>'Ajouter  vos documents ',
+                'multiple'=>true,
+                'mapped'=>false,
+                'required'=>false
+            ])
+        ->add('imagesSupp',FileType::class,[
+          'label'=>'Ajouter  d\'autres images',
+         'multiple'=>true,
+        'mapped'=>false,
+        'required'=>false
+        ]);
+
 
     }
 

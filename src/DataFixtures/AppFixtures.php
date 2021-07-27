@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Appartement;
 use App\Entity\House;
+use App\Entity\ImagesSupp;
 use App\Entity\RealEstate;
 use App\Entity\Type;
 use App\Entity\user;
@@ -70,7 +71,7 @@ class AppFixtures extends Fixture
         }
 
 
-        for($i=1 ;$i<= 200; $i++){
+        for($i=1 ;$i<= 5; $i++){
         $realEstate = new RealEstate();
         $type =$this->getReference('type-'.rand(0,count($typeNames)-1));
         $title= ucfirst($type->getName()).' ';
@@ -86,7 +87,7 @@ class AppFixtures extends Fixture
                    ->setType($type)
                    ->setSold($faker->boolean(30))
             ->setSlug($this->slugger->slug($realEstate->getTitle(),'_',$realEstate->getReferenceDuBien()))
-                   //->setSlug($realEstate->getReferenceDuBien())
+            ->setSlug($realEstate->getReferenceDuBien())
                     ->setImage($faker->randomElement(['image1.jpg','image2.jpg','image3.jpg']))
                     ->setOwner($this->getReference('user-'.rand(0, 9)))
                     ->setCity($faker->randomElement($city))
@@ -113,6 +114,16 @@ class AppFixtures extends Fixture
                     ->setAnneeRenovation($faker->numberBetween(1990,2020))
                     ->setEtage($faker->numberBetween(0,5))
                     ->setCharge($faker->numberBetween(0,1000));
+
+
+
+        //On génère images
+             for($image = 1; $image<5; $image++){
+                 $img = $faker->randomElement(['image1.jpg','image2.jpg','image3.jpg']);
+                 $imageDuBien = new ImagesSupp();
+                 $imageDuBien->setName(str_replace('public/img/uploads/','',$img));
+                 $realEstate->addImagesSupp($imageDuBien);
+             }
             $manager->persist($realEstate);
         }
 

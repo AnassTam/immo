@@ -123,7 +123,7 @@ class RealEstateController extends AbstractController
             // Ici   ajout ds la base de donnée  si tt est bon
 
             //On récupère les images transmises
-            $images =$form->get('image')->getData();
+            $images =$form->get('imagesSupp')->getData();
 
             // On boucle  sur es imagesSupp
             foreach ($images as $image){

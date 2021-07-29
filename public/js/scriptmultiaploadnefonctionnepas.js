@@ -15,7 +15,7 @@ $('#real_estate_surface').on('input',function(){
 $('#real_estate_surface').on('input',function (){
     $('#result').remove()
     $(this).after('<div id ="result">' +$(this).val()+'m2</div>')
-})
+});
 
 // Affichage de l'image
 $(function() {
@@ -26,7 +26,6 @@ $(function() {
             var filesAmount = input.files.length;
 
             for (i = 0; i < filesAmount; i++) {
-
                 var reader = new FileReader();
 
                 reader.onload = function(event) {
@@ -39,7 +38,7 @@ $(function() {
 
     };
 
-    $('#real_estate_imagesSupp').on('change', function() {
+    $('#gallery-photo-add').on('change', function() {
         imagesPreview(this, 'div.gallery');
     });
 });

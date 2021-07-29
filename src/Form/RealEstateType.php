@@ -167,10 +167,11 @@ class RealEstateType extends AbstractType
                 'required'=>false
             ])
         ->add('imagesSupp',FileType::class,[
-          'label'=>'Ajouter  d\'autres images',
+         'label'=>'Ajouter  d\'autres images',
          'multiple'=>true,
-        'mapped'=>false,
-        'required'=>false
+         'mapped'=>false,
+         'required'=>false
+
         ]);
 
 

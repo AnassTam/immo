@@ -26,7 +26,6 @@ class WelcomeController extends AbstractController
     $les3produitsCarossels= $realEstateRepository->findBy([],[],3);
     $les3derinersBiensAjoutee = $realEstateRepository->findBy([],['id'=>'DESC'],3);
     $types= $typeRepository->findAll();
-
     return $this->render('welcome/home.html.twig',[
         'typess' => $types,
         'products' => $les3derinersBiensAjoutee,

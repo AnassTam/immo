@@ -338,7 +338,10 @@
                 </div>
             <div id="photos" class="container tab-pane fade"><br>
                     <h3>Photos</h3>
-                {{ form_row(realEstateForm.imagesSupp) }}
+                {{ form_row(realEstateForm.imagesSupp , {'attr': {id: 'gallery-photo-add'}}) }}
+
+
+                <div class="gallery"></div>
                 </div>
             </div>
         </div>

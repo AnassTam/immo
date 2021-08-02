@@ -21,9 +21,9 @@
                         <div class="card">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">1</li>
                                     {% for i in 1.. (property.imagesSupps|length -1 ) %}
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}">2</li>
                                     {% endfor %}
 
 
@@ -191,10 +191,76 @@
 
                 </div>
             </div>
+
+
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#InformationsGenerales">
+                                Informations générales
+                            </a>
+                        </div>
+                        <div id="InformationsGenerales" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#Surfaces">
+                                Les surfaces
+                            </a>
+                        </div>
+                        <div id="Surfaces" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#Prestation">
+                                Prestation
+                            </a>
+                        </div>
+                        <div id="Prestation" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#Reglementation">
+                                Réglementation
+                            </a>
+                        </div>
+                        <div id="Reglementation" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#Proximite">
+                                Proximité
+                            </a>
+                        </div>
+                        <div id="Proximite" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
         </div>
     </div>
-
-
+        </div>
+    </div>
 
 
 

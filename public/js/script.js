@@ -20,6 +20,12 @@ $('#real_estate_surface').on('input',function (){
 // Affichage de l'image
 $(function() {
     // Multiple images preview in browser
+    $('#real_estate_imagesSupp').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+    $('#real_estate_documentsVendeurs').on('change', function() {
+        imagesPreview(this, 'div.gallery2');
+    });
     var imagesPreview = function(input, placeToInsertImagePreview) {
 
         if (input.files) {
@@ -30,7 +36,10 @@ $(function() {
                 var reader = new FileReader();
 
                 reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    $($.parseHTML('<img>')).attr({
+                        'src': event.target.result,
+                        'style':' width:300px; height: 230px'
+                    }).appendTo(placeToInsertImagePreview);
                 }
 
                 reader.readAsDataURL(input.files[i]);
@@ -39,7 +48,6 @@ $(function() {
 
     };
 
-    $('#real_estate_imagesSupp').on('change', function() {
-        imagesPreview(this, 'div.gallery');
-    });
+
+
 });

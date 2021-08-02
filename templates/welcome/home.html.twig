@@ -3,34 +3,34 @@
 
      <div class="container-fluid px-0   " >
 
-         {# php image accueil et formulaire#}
-         <div class="row mt-5" >
-             <div class="card col-12    " >
-                 <img class="" src="{{ asset('img/image_accueil1.png') }}" alt="Card image">
-                 <div class="card-img-overlay">
-                     <div class="col-md-3 offset-md-3 bg-light h-75 pt-5 ">
-<h3>Chercher un bien</h3>
-                         <form action="" method="get">
-                             <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
-                             <div class="form-group">
-                                 <label for="exampleFormControlSelect1">Type de bien </label>
+     {# php image accueil et formulaire#}
+     <div class="row mt-5" >
+         <div class="card col-12    " >
+             <img class="" src="{{ asset('img/image_accueil1.png') }}" alt="Card image">
+             <div class="card-img-overlay">
+                 <div class="col-md-3 offset-md-3 bg-light h-75 pt-5 ">
+                     <h3>Chercher un bien</h3>
+                     <form action="" method="get">
+                         <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
+                         <div class="form-group">
+                             <label for="exampleFormControlSelect1">Type de bien </label>
                              <select class="form-control mb-3" name="leBien">
-                                         <option>Maison</option>
-                                         <option>appartement </option>
-                                         <option>Garage</option>
-                                         <option>Villa</option>
+                                 <option>Maison</option>
+                                 <option>appartement </option>
+                                 <option>Garage</option>
+                                 <option>Villa</option>
 
 
-                                {# <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
+                                 {# <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
                                  {% for size in sizes %}
                                      <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
                                  {% endfor %}#}
 
                              </select>
-                             </div>
-                             <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
-                             <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
-                             {# <select class="form-control mb-3" name="size">
+                         </div>
+                         <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
+                         <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
+                         {# <select class="form-control mb-3" name="size">
                                  <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
                                  {% for size in sizes %}
                                      <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
@@ -40,47 +40,47 @@
 
 
 
-                             <button class="btn btn-primary btn-block ">Filtrer </button>
-                         </form>
-</div>
-
-                 </div>
-             </div>
-
-         </div>
-         {#  2 div   j'achete un bien & je vends mon  bien  #}
-
-         <div class="row justify-content-center mt-5 " style="background-color:  #EBEBEB">
-             <h2 class=" mb-5">  Nous allons vous aider pour trouver votre bonheur </h2>
-             <div class="card-deck col-8  px-0">
-
-                 <div class="card card_accueil ">
-
-                     <img class="card-img-top" src="{{ asset('img/acheter_un_bien.jpg') }}" alt="Card image cap">
-                     <div class="card-body">
-                         <h5 class="card-title">J'achete un bien </h5>
-                         <p class="card-text">Trouvez votre nouvelle maison,appartement ou autre... . toutes nos annonces ont des photos descriptives du bien.  y compris des choses que vous ne trouvez  nulle part ailleurs </p>
-                         <a href="#" class="stretched-link"></a>
-                     </div>
-                 </div>
-                 <div class="card card_accueil">
-                     <img class="card-img-top" src="{{ asset('img/vendre_un_bien.jpg') }}" alt="Card image cap">
-                     <div class="card-body">
-                         <h5 class="card-title">Je vends mon bien  </h5>
-                         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                         <a href="{{ path("real_estate_create") }}" class="stretched-link"></a>
-                     </div>
+                         <button class="btn btn-primary btn-block ">Filtrer </button>
+                     </form>
                  </div>
 
              </div>
          </div>
-         {#  debut carousel #}
+
+     </div>
+     {#  2 div   j'achete un bien & je vends mon  bien  #}
+
+     <div class="row justify-content-center mt-5 " style="background-color:  #EBEBEB">
+         <h2 class=" mb-5">  Nous allons vous aider pour trouver votre bonheur </h2>
+         <div class="card-deck col-8  px-0">
+
+             <div class="card card_accueil ">
+
+                 <img class="card-img-top" src="{{ asset('img/acheter_un_bien.jpg') }}" alt="Card image cap">
+                 <div class="card-body">
+                     <h5 class="card-title">J'achete un bien </h5>
+                     <p class="card-text">Trouvez votre nouvelle maison,appartement ou autre... . toutes nos annonces ont des photos descriptives du bien.  y compris des choses que vous ne trouvez  nulle part ailleurs </p>
+                     <a href="#" class="stretched-link"></a>
+                 </div>
+             </div>
+             <div class="card card_accueil">
+                 <img class="card-img-top" src="{{ asset('img/vendre_un_bien.jpg') }}" alt="Card image cap">
+                 <div class="card-body">
+                     <h5 class="card-title">Je vends mon bien  </h5>
+                     <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                     <a href="{{ path("real_estate_create") }}" class="stretched-link"></a>
+                 </div>
+             </div>
+
+         </div>
+     </div>
+     {#  debut carousel #}
      <div class="row  justify-content-center mt-1 ">
-             <div class="col-8">
-                 <div class="card  ">
-                     <div class="card-header bg-primary text-white text-uppercase">
-                         <i class="fa fa-star"></i> Nos coup de coeur
-                     </div>
+         <div class="col-8">
+             <div class="card  ">
+                 <div class="card-header bg-primary text-white text-uppercase">
+                     <i class="fa fa-star"></i> Nos coup de coeur
+                 </div>
                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                      <ol class="carousel-indicators">
                          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -111,42 +111,42 @@
                  </div>
              </div>
 
-             </div>
+         </div>
          {# Dernieres annonces #}
-             <div class="row  justify-content-center mt-1 " style="background-color:  #EBEBEB" >
+         <div class="row  justify-content-center mt-1 " style="background-color:  #EBEBEB" >
 
-                 <div class=" col-8"  >
-                     <div class="card  ">
-                         <div class="card-header bg-primary text-white text-uppercase">
-                             <i class="fa fa-star"></i> Dernières annonces
-                         </div>
-                         <div class="card-body">
-                             <div class="row">
-                                 {% for p in products  %}
-                                     <div class="col-sm">
-                                         <div class="card">
-                                             {% set image = p.imagesSupps|first %}
-                                             <img class="card-img-top"  src="{{ asset('img/uploads/' ~ image.name) }}" alt="Card image cap">
+             <div class=" col-8"  >
+                 <div class="card  ">
+                     <div class="card-header bg-primary text-white text-uppercase">
+                         <i class="fa fa-star"></i> Dernières annonces
+                     </div>
+                     <div class="card-body">
+                         <div class="row">
+                             {% for p in products  %}
+                                 <div class="col-sm">
+                                     <div class="card">
+                                         {% set image = p.imagesSupps|first %}
+                                         <img class="card-img-top"  src="{{ asset('img/uploads/' ~ image.name) }}" alt="Card image cap">
 
-                                             <div class="card-body">
-                                                 <a href="{{ path('real_estate_show',{slug:p.slug, id:p.id}) }}" class="stretched-link"><h4 class="card-title">{{ p.title}}.réf: {{ p.id }}</h4></a>
-                                                 <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                                                 <div class="row">
-                                                     <div class="col">
-                                                         <p class="btn btn-info btn-block">{{ p.price }} &euro;</p>
-                                                     </div>
-
+                                         <div class="card-body">
+                                             <a href="{{ path('real_estate_show',{slug:p.slug, id:p.id}) }}" class="stretched-link"><h4 class="card-title">{{ p.title}}.réf: {{ p.id }}</h4></a>
+                                             <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                             <div class="row">
+                                                 <div class="col">
+                                                     <p class="btn btn-info btn-block">{{ p.price }} &euro;</p>
                                                  </div>
+
                                              </div>
                                          </div>
                                      </div>
-                                 {% endfor %}
+                                 </div>
+                             {% endfor %}
 
 
-                             </div>
                          </div>
                      </div>
                  </div>
+             </div>
 
          </div>
 
@@ -173,7 +173,7 @@
          </form>
 
      </div>
-    #}
+     #}
 
 
  {% endblock %}

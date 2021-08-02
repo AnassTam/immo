@@ -50,21 +50,70 @@ class RealEstateType extends AbstractType
             ])
             ->add('city')
             ->add('chambre')
-            ->add('standing')
-            ->add('etatDuBien')
-            ->add('vueDubien')
-            ->add('eauChaude')
-            ->add('chauffage')
+            ->add('standing', ChoiceType::class, [
+                'choices' => [
+                    'Normal' => 'Normal',
+                    'Moyen' => 'Moyen',
+                    'Haut' =>'Haut',
+
+                ],
+            ])
+            ->add('etatDuBien', ChoiceType::class, [
+                'choices' => [
+                    'A rafraichir' => 'A rafraichir',
+                    'A rénover' => 'A rénover',
+                    'Bon état' =>'Bon état',
+                    'Excelent état' =>'Excelent état',
+                    'Neuf' =>'Neuf',
+                ],
+            ])
+            ->add('vueDubien', ChoiceType::class, [
+                'choices' => [
+                    'Nord' => 'Nord',
+                    'Sud' => 'Sud',
+                    'Est' =>'Est',
+                    'Ouest' =>'Ouest',
+
+                ],
+            ])
+            ->add('eauChaude', ChoiceType::class, [
+                'choices' => [
+                    'Collective' => 'Collective',
+                    'Individuelle' => 'Indeviduelle',
+                ],
+            ])
+            ->add('chauffage', ChoiceType::class, [
+                'choices' => [
+                    'Electrique' => 'Electrique',
+                    'Fuel' => 'Fuel',
+                    'Gaz' =>'Gaz',
+                ],
+            ])
             ->add('niveau')
             ->add('ascenseur')
             ->add('piscine')
             ->add('balcon')
             ->add('garage')
             ->add('parking')
-            ->add('exposition')
+            ->add('exposition', ChoiceType::class, [
+                'choices' => [
+                    'Nord' => 'Nord',
+                    'Sud' => 'Sud',
+                    'Est' =>'Est',
+                    'Ouest' =>'Ouest',
+
+                ],
+            ])
             ->add('anneeConstruction')
             ->add('anneeRenovation')
-            ->add('etage')
+            ->add('etage', ChoiceType::class, [
+                'choices' => [
+                    'Rez-de-chaussée' => 'Electrique',
+                    'Surélevé' => 'Fuel',
+                    'Dérnier étage' =>'Gaz',
+                    'Plein-pied' =>'Gaz',
+                ],
+            ])
             ->add('charge')
             ->add('statut')
             ->add('adresseProprietaire')
@@ -155,24 +204,24 @@ class RealEstateType extends AbstractType
             ->add('taxeHabitation')
             ->add('typeTransaction')
             //->add('image', FileType::class, [
-               // 'label'=>'Ajouter  d\'autres images',
-              //  'multiple'=>true,
-              //  'mapped'=>false,
-              //  'required'=>false
-           // ])
-            ->add('documentsVendeur', FileType::class, [
+            // 'label'=>'Ajouter  d\'autres images',
+            //  'multiple'=>true,
+            //  'mapped'=>false,
+            //  'required'=>false
+            // ])
+            ->add('documentsVendeurs', FileType::class, [
                 'label'=>'Ajouter  vos documents ',
                 'multiple'=>true,
                 'mapped'=>false,
                 'required'=>false
             ])
-        ->add('imagesSupp',FileType::class,[
-         'label'=>'Ajouter  d\'autres images',
-         'multiple'=>true,
-         'mapped'=>false,
-         'required'=>false
+            ->add('imagesSupp',FileType::class,[
+                'label'=>'Ajouter  d\'autres images',
+                'multiple'=>true,
+                'mapped'=>false,
+                'required'=>false
 
-        ]);
+            ]);
 
 
     }

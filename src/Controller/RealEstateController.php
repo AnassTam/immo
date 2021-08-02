@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DocumentsVendeur;
 use App\Entity\ImagesSupp;
 use App\Entity\RealEstate;
 use App\Form\RealEstateType;
@@ -131,7 +132,7 @@ class RealEstateController extends AbstractController
                 $fichier =md5(uniqid()) .  '.' .$image->guessExtension();
                 //On copie le fichier dans le dossier uploads
                 $image->move(
-                    $this->getParameter('upload_directory'),
+                    $this->getParameter('upload_img_directory'),
                     $fichier
                 );
                 // On stocke l 'imageSupp dans la base de données( le nom
@@ -140,12 +141,29 @@ class RealEstateController extends AbstractController
                 $realEstate->addImagesSupp($img);
 
             }
+            //---------------------------------
+            //On récupère les documentsVendeurs transmises
+            $docs =$form->get('documentsVendeurs')->getData();
+
+            // On boucle  sur es imagesSupp
+            foreach ($docs as $doc) {
+                //On génère un nouveau fichier
+                $nomDoc = md5(uniqid()) . '.' . $doc->guessExtension();
+                //On copie le fichier dans le dossier uploads
+                $doc->move(
+                    $this->getParameter('upload_doc_directory'),
+                    $nomDoc
+                );
+                // On stocke les doduments du vendeurs  dans la base de données( le nom
+                $img = new DocumentsVendeur();
+                $img->setName($nomDoc);
+                $realEstate->addDocumentsVendeur($img);
+            }
+
+            //---------------------------------
 
             $slug = $slugger->slug($realEstate->getTitle());
             $realEstate->setSlug($slug);
-
-
-
 
             // je relie  l'annonce à l'utilisateur qui est connecté
             $realEstate->setOwner($this->getUser());
@@ -221,3 +239,4 @@ class RealEstateController extends AbstractController
 
     }
 }
+

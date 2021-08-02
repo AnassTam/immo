@@ -645,9 +645,11 @@ class RealEstate
     private $imagesSupps;
 
     /**
-     * @ORM\OneToMany(targetEntity=DocumentsVendeur::class, mappedBy="realEstate")
+     * @ORM\OneToMany(targetEntity=DocumentsVendeur::class, mappedBy="realEstate",orphanRemoval=true, cascade={"persist"})
      */
     private $documentsVendeurs;
+
+
 
     public function __construct()
     {
@@ -2136,6 +2138,8 @@ class RealEstate
 
         return $this;
     }
+
+
 
 
 

@@ -46,3 +46,8 @@ h5{
     height: 80vh;
     overflow: hidden;
 }
+
+.gallery{
+
+    border: 1px solid red;
+}

@@ -18,6 +18,7 @@
 
                         </div>
                     </div>
+                    <div class="col-10">
                         <div class="card">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
@@ -32,7 +33,7 @@
                                 <div class="carousel-inner">
                                     {% for image in property.imagesSupps %}
                                         <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
-                                            <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ image.name) }}" >
+                                            <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ image.name) }}"  alt="">
 
                                             <div href="#" class="carousel-caption d-none d-md-block stretched-link">
 
@@ -51,6 +52,7 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
 
                     </div>
 
@@ -75,7 +77,7 @@
             </div>
 
 
-            <div class="row">
+            {#  <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <table class="  jus table table-striped">
 
@@ -179,21 +181,17 @@
                             <td>{{ property.investissementLocatif }}</td>
                         </tr>
 
-
-
-
-
-
-
                         </tbody>
                     </table>
 
 
                 </div>
-            </div>
+            </div>#}
 
 
                 <div id="accordion">
+
+                    {# -----------------------------------   collapse information générale  ---------------------------- #}
                     <div class="card">
                         <div class="card-header">
                             <a class="card-link" data-toggle="collapse" href="#InformationsGenerales">
@@ -201,11 +199,26 @@
                             </a>
                         </div>
                         <div id="InformationsGenerales" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
+                            <div class=" row card-body">
+                                {% set tabEquipement =[property.niveau,property.standing,property.exposition,property.vueDubien
+                                    ,property.eauChaude ,property.chauffage ,property.etatDuBien ,property.anneeConstruction
+                                    ,property.anneeRenovation ,property.styleDuBien ,property.charge ,property.taxeFonciere
+                                    ,property.taxeHabitation ,property.etage] %}
+                                <div class="row">
+                                    {% for i in tabEquipement  %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
 
                             </div>
                         </div>
                     </div>
+                    {# -----------------------------------  end collapse Information générale ---------------------------- #}
+                    {# -----------------------------------   collapse surfaces  ---------------------------- #}
                     <div class="card">
                         <div class="card-header">
                             <a class="collapsed card-link" data-toggle="collapse" href="#Surfaces">
@@ -214,10 +227,22 @@
                         </div>
                         <div id="Surfaces" class="collapse" data-parent="#accordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                {% set tabEquipement =[property.balconSurface,property.garageSurface,property.cuisineSurface,property.salonSurface
+                                    ,property.chambre1Surface ,property.chambre2Surface,property.chambre3Surface ,property.entreeSurface] %}
+                                <div class="row">
+                                    {% for i in tabEquipement  %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div><br>
                             </div>
                         </div>
                     </div>
+                    {# -----------------------------------  end collapse Surfaces ---------------------------- #}
+                    {# ----------------------------------- collapse Prestation ---------------------------- #}
                     <div class="card">
                         <div class="card-header">
                             <a class="collapsed card-link" data-toggle="collapse" href="#Prestation">
@@ -226,26 +251,88 @@
                         </div>
                         <div id="Prestation" class="collapse" data-parent="#accordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                {% set tabEquipement =[property.chauffage,property.stores,property.cheminee,property.internet
+                                    ,property.airConditionne ,property.stores ,property.doubleVitrage ,property.aspirateurCentralisee
+                                    ,property.voletsRoulantsElectrique ,property.fenetresCoulissante ,property.tripleVitrage ,property.panneauSolaires
+                                    ,property.fibreOptique ,property.alarmeIncendie] %}
+                                <div class="row">
+                                {% for i in tabEquipement  %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div><br>
+                                {% set tabExterieur =[property.piscine, property.borneVoitureElectrique, property.abriVoiture, property.arrosage
+                                    ,property.puits ,property.barbecue ,property.eclairageExterieur ,property.source] %}
+                                <div class="row">
+                                    {% for i in tabExterieur  %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div><br>
+                                {% set tabBatiment =[property.ascenseur, property.buanderieCommune, property.parking]%}
+                                <div class="row">
+                                    {% for i in tabBatiment  %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div><br>
+                                {% set tabSecurite =[property.concierge, property.alarme, property.porteBlindee
+                                    ,property.digicode, property.gardien, property.videoSurveillance, property.videSanitaire, property.interphone
+                                     , property.videophone]%}
+                                <div class="row">
+                                    {% for i in tabSecurite %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
+                    {# -----------------------------------  end collapse Prestation ---------------------------- #}
+                    {# -----------------------------------   collapse  Proximité  ---------------------------- #}
                     <div class="card">
                         <div class="card-header">
                             <a class="collapsed card-link" data-toggle="collapse" href="#Reglementation">
-                                Réglementation
+                                Proximité
                             </a>
                         </div>
                         <div id="Reglementation" class="collapse" data-parent="#accordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                {% set tabEquipement =[property.aeroportDistance,property.centreVilleDistance,property.crecheDistance,property.gareDistance
+                                    ,property.medecinDistance ,property.piscinePubliqueDistance ,property.supermarcheDistance ,property.metroDistance
+                                    ,property.autorouteDistance ,property.cinemaDistance ,property.ecolePrimaireDistance ] %}
+                                <div class="row">
+                                    {% for i in tabEquipement  %}
+                                        {% if i != 0 %}
+                                            <div class="col-4">
+                                                <i class="fa fa-check">  {{ i }}</i>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {# -----------------------------------  end collapse Proximité---------------------------- #}
+                    {# -----------------------------------   collapse Réglementation  ---------------------------- #}
                     <div class="card">
                         <div class="card-header">
                             <a class="collapsed card-link" data-toggle="collapse" href="#Proximite">
-                                Proximité
+                                Réglementation
                             </a>
                         </div>
                         <div id="Proximite" class="collapse" data-parent="#accordion">
@@ -254,13 +341,15 @@
                             </div>
                         </div>
                     </div>
+                    {# -----------------------------------  end collapse Réglementation---------------------------- #}
+
 
 
             </div>
         </div>
     </div>
-        </div>
-    </div>
+
+
 
 
 

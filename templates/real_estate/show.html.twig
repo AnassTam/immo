@@ -5,15 +5,15 @@
         <div class="row py-4" xmlns="http://www.w3.org/1999/html">
             <div class="col-log-6 divImg">
                 {% if property.sold %}
-                    <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
+                    <img class="vendu" src="{{ asset('img/sold.png') }}" alt="Vendu">
                 {% endif %}
                 <div class="row  justify-content-center mt-1 ">
                     <div class="col-8">
 
-                            <h1>Vente {{ property.type.name}} {{ property.surface }}m² {{ property.city }} </h1>
-                            <div class="row">
-                                <div><h2> {{ property.price }} €</h2></div>
-                                <div>  Réf: {{ property.referenceDuBien }}</div>
+                        <h1>Vente {{ property.type.name }} {{ property.surface }}m² {{ property.city }} </h1>
+                        <div class="row">
+                            <div><h2> {{ property.price }} €</h2></div>
+                            <div> Réf: {{ property.referenceDuBien }}</div>
 
 
                         </div>
@@ -32,8 +32,9 @@
 
                                 <div class="carousel-inner">
                                     {% for image in property.imagesSupps %}
-                                        <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
-                                            <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ image.name) }}"  alt="">
+                                        <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                            <img class=" -block w-100 imgscarossel "
+                                                 src="{{ asset('img/uploads/' ~ image.name) }}" alt="">
 
                                             <div href="#" class="carousel-caption d-none d-md-block stretched-link">
 
@@ -42,11 +43,13 @@
                                     {% endfor %}
 
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                   data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                   data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -54,12 +57,10 @@
                         </div>
                     </div>
 
-                    </div>
+                </div>
 
 
-
-
-{# fin  de carossel #}
+                {# fin  de carossel #}
             </div>
             <div class="col-log-6">
                 <h1> {{ title }}</h1>
@@ -77,7 +78,7 @@
             </div>
 
 
-            {#  <div class="row">
+            {# <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <table class="  jus table table-striped">
 
@@ -186,163 +187,169 @@
 
 
                 </div>
-            </div>#}
+            </div> #}
 
 
-                <div id="accordion">
+            <div id="accordion">
 
-                    {# -----------------------------------   collapse information générale  ---------------------------- #}
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#InformationsGenerales">
-                                Informations générales
-                            </a>
-                        </div>
-                        <div id="InformationsGenerales" class="collapse show" data-parent="#accordion">
-                            <div class=" row card-body">
-                                {% set tabEquipement =[property.niveau,property.standing,property.exposition,property.vueDubien
-                                    ,property.eauChaude ,property.chauffage ,property.etatDuBien ,property.anneeConstruction
-                                    ,property.anneeRenovation ,property.styleDuBien ,property.charge ,property.taxeFonciere
-                                    ,property.taxeHabitation ,property.etage] %}
-                                <div class="row">
-                                    {% for i in tabEquipement  %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-
-                            </div>
-                        </div>
+                {# -----------------------------------   collapse information générale  ---------------------------- #}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#InformationsGenerales">
+                            Informations générales
+                        </a>
                     </div>
-                    {# -----------------------------------  end collapse Information générale ---------------------------- #}
-                    {# -----------------------------------   collapse surfaces  ---------------------------- #}
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#Surfaces">
-                                Les surfaces
-                            </a>
-                        </div>
-                        <div id="Surfaces" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                {% set tabEquipement =[property.balconSurface,property.garageSurface,property.cuisineSurface,property.salonSurface
-                                    ,property.chambre1Surface ,property.chambre2Surface,property.chambre3Surface ,property.entreeSurface] %}
-                                <div class="row">
-                                    {% for i in tabEquipement  %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div><br>
-                            </div>
-                        </div>
-                    </div>
-                    {# -----------------------------------  end collapse Surfaces ---------------------------- #}
-                    {# ----------------------------------- collapse Prestation ---------------------------- #}
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#Prestation">
-                                Prestation
-                            </a>
-                        </div>
-                        <div id="Prestation" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                {% set tabEquipement =[property.chauffage,property.stores,property.cheminee,property.internet
-                                    ,property.airConditionne ,property.stores ,property.doubleVitrage ,property.aspirateurCentralisee
-                                    ,property.voletsRoulantsElectrique ,property.fenetresCoulissante ,property.tripleVitrage ,property.panneauSolaires
-                                    ,property.fibreOptique ,property.alarmeIncendie] %}
-                                <div class="row">
-                                {% for i in tabEquipement  %}
+                    <div id="InformationsGenerales" class="collapse show" data-parent="#accordion">
+                        <div class=" row card-body">
+                            {% set tabEquipement =[property.niveau,property.standing,property.exposition,property.vueDubien
+                                ,property.eauChaude ,property.chauffage ,property.etatDuBien ,property.anneeConstruction
+                                ,property.anneeRenovation ,property.styleDuBien ,property.charge ,property.taxeFonciere
+                                ,property.taxeHabitation ,property.etage] %}
+                            <div class="row">
+                                {% for i in tabEquipement %}
                                     {% if i != 0 %}
                                         <div class="col-4">
                                             <i class="fa fa-check">  {{ i }}</i>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
-                            </div><br>
-                                {% set tabExterieur =[property.piscine, property.borneVoitureElectrique, property.abriVoiture, property.arrosage
-                                    ,property.puits ,property.barbecue ,property.eclairageExterieur ,property.source] %}
-                                <div class="row">
-                                    {% for i in tabExterieur  %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div><br>
-                                {% set tabBatiment =[property.ascenseur, property.buanderieCommune, property.parking]%}
-                                <div class="row">
-                                    {% for i in tabBatiment  %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div><br>
-                                {% set tabSecurite =[property.concierge, property.alarme, property.porteBlindee
-                                    ,property.digicode, property.gardien, property.videoSurveillance, property.videSanitaire, property.interphone
-                                     , property.videophone]%}
-                                <div class="row">
-                                    {% for i in tabSecurite %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {# -----------------------------------  end collapse Information générale ---------------------------- #}
+                {# -----------------------------------   collapse surfaces  ---------------------------- #}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#Surfaces">
+                            Les surfaces
+                        </a>
+                    </div>
+                    <div id="Surfaces" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            {% set tabEquipement =[property.balconSurface,property.garageSurface,property.cuisineSurface,property.salonSurface
+                                ,property.chambre1Surface ,property.chambre2Surface,property.chambre3Surface ,property.entreeSurface] %}
+                            <div class="row">
+                                {% for i in tabEquipement %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                {# -----------------------------------  end collapse Surfaces ---------------------------- #}
+                {# ----------------------------------- collapse Prestation ---------------------------- #}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#Prestation">
+
+                            Prestation
+                        </a>
+                    </div>
+                    <div id="Prestation" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            {% set tabEquipement =[property.chauffage,property.stores,property.cheminee,property.internet
+                                ,property.airConditionne ,property.stores ,property.doubleVitrage ,property.aspirateurCentralisee
+                                ,property.voletsRoulantsElectrique ,property.fenetresCoulissante ,property.tripleVitrage ,property.panneauSolaires
+                                ,property.fibreOptique ,property.alarmeIncendie] %}
+                            <div class="row">
+                                {% for i in tabEquipement %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <br>
+                            {% set tabExterieur =[property.piscine, property.borneVoitureElectrique, property.abriVoiture, property.arrosage
+                                ,property.puits ,property.barbecue ,property.eclairageExterieur ,property.source] %}
+                            <div class="row">
+                                {% for i in tabExterieur %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <br>
+                            {% set tabBatiment =[property.ascenseur, property.buanderieCommune, property.parking] %}
+                            <div class="row">
+                                {% for i in tabBatiment %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <br>
+                            {% set tabSecurite =[property.concierge, property.alarme, property.porteBlindee
+                                ,property.digicode, property.gardien, property.videoSurveillance, property.videSanitaire, property.interphone
+                                , property.videophone] %}
+                            <div class="row">
+                                {% for i in tabSecurite %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
 
 
+                        </div>
+                    </div>
+                </div>
+                {# -----------------------------------  end collapse Prestation ---------------------------- #}
+                {# -----------------------------------   collapse  Proximité  ---------------------------- #}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#Reglementation">
+                            Proximité
+                        </a>
+                    </div>
+                    <div id="Reglementation" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            {% set tabEquipement =[property.aeroportDistance,property.centreVilleDistance,property.crecheDistance,property.gareDistance
+                                ,property.medecinDistance ,property.piscinePubliqueDistance ,property.supermarcheDistance ,property.metroDistance
+                                ,property.autorouteDistance ,property.cinemaDistance ,property.ecolePrimaireDistance ] %}
+                            <div class="row">
+                                {% for i in tabEquipement %}
+                                    {% if i != 0 %}
+                                        <div class="col-4">
+                                            <i class="fa fa-check">  {{ i }}</i>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                    {# -----------------------------------  end collapse Prestation ---------------------------- #}
-                    {# -----------------------------------   collapse  Proximité  ---------------------------- #}
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#Reglementation">
-                                Proximité
-                            </a>
-                        </div>
-                        <div id="Reglementation" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                {% set tabEquipement =[property.aeroportDistance,property.centreVilleDistance,property.crecheDistance,property.gareDistance
-                                    ,property.medecinDistance ,property.piscinePubliqueDistance ,property.supermarcheDistance ,property.metroDistance
-                                    ,property.autorouteDistance ,property.cinemaDistance ,property.ecolePrimaireDistance ] %}
-                                <div class="row">
-                                    {% for i in tabEquipement  %}
-                                        {% if i != 0 %}
-                                            <div class="col-4">
-                                                <i class="fa fa-check">  {{ i }}</i>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
+                </div>
+                {# -----------------------------------  end collapse Proximité---------------------------- #}
+                {# -----------------------------------   collapse Réglementation  ---------------------------- #}
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#Proximite">
+                            Réglementation
+                        </a>
+                    </div>
+                    <div id="Proximite" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
                         </div>
                     </div>
-                    {# -----------------------------------  end collapse Proximité---------------------------- #}
-                    {# -----------------------------------   collapse Réglementation  ---------------------------- #}
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#Proximite">
-                                Réglementation
-                            </a>
-                        </div>
-                        <div id="Proximite" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                        </div>
-                    </div>
-                    {# -----------------------------------  end collapse Réglementation---------------------------- #}
-
+                </div>
+                {# -----------------------------------  end collapse Réglementation---------------------------- #}
 
 
             </div>

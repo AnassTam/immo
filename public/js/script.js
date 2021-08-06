@@ -31,23 +31,41 @@ $(function() {
         if (input.files) {
             var filesAmount = input.files.length;
 
+
             for (i = 0; i < filesAmount; i++) {
 
                 var reader = new FileReader();
 
                 reader.onload = function(event) {
+
+                    $($.parseHTML('<div>')).attr({
+                            'class':'imgIconRemove',
+                        }
+                    ).appendTo(placeToInsertImagePreview);
                     $($.parseHTML('<img>')).attr({
                         'src': event.target.result,
-                        'style':' width:300px; height: 230px'
-                    }).appendTo(placeToInsertImagePreview);
-                }
+                        'class':'imagetest '
+                    }
+                    ).appendTo('.gallery > div:last-child');
+                    $($.parseHTML('<div>')).attr({
 
+                            'class':'iconeRemove fa fa-remove',
+                        }
+                    ).appendTo('.gallery > div:last-child');
+
+                }
                 reader.readAsDataURL(input.files[i]);
+
             }
+
+
         }
 
     };
 
-
-
 });
+$('body').on('click','.imgIconRemove',function(){
+    $(this).remove();})
+
+
+

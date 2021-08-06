@@ -18,20 +18,36 @@ $('#real_estate_surface').on('input',function (){
 })
 
 // Affichage de l'image
-$('[type="file"]').on('change', function(file){
+$(function() {
+    // Multiple images preview in browser
+    $('#real_estate_imagesSupp').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+    $('#real_estate_documentsVendeurs').on('change', function() {
+        imagesPreview(this, 'div.gallery2');
+    });
+    var imagesPreview = function(input, placeToInsertImagePreview) {
 
-    var label=$(this).val().split('\\').pop();// pop() .pour recuperer la derniere valeur du tableau
-    $(this).next().text(label);
+        if (input.files) {
+            var filesAmount = input.files.length;
 
-    let reader = new FileReader();  //afficher l 'image generer par  l'utilisateur
+            for (i = 0; i < filesAmount; i++) {
 
-    reader.addEventListener('load', function(file){
-        $('.custom-file img').remove();
-        let base64 = file.target.result;
-        let img =$('<img class="img-fluid mt-5" width="250"/>');
-        img.attr('src', base64);
-        $('.custom-file').prepend(img);
+                var reader = new FileReader();
 
-    })
-    reader.readAsDataURL(this.files[0]);
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr({
+                        'src': event.target.result,
+                        'style':' width:300px; height: 230px'
+                    }).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+
+
 });

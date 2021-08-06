@@ -124,9 +124,11 @@
                          <div class="row">
                              {% for p in products  %}
                                  <div class="col-sm">
-                                     <div class="card">
+                                     <div class="card  divTransformShadow ">
                                          {% set image = p.imagesSupps|first %}
                                          <img class="card-img-top"  src="{{ asset('img/uploads/' ~ image.name) }}" alt="Card image cap">
+
+
 
                                          <div class="card-body">
                                              <a href="{{ path('real_estate_show',{slug:p.slug, id:p.id}) }}" class="stretched-link"><h4 class="card-title">{{ p.title}}.réf: {{ p.id }}</h4></a>

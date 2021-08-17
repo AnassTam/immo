@@ -19,49 +19,58 @@ class WelcomeController extends AbstractController
      * @Route("/", name="homepage")
      */
 
-    public function home(RealEstateRepository $realEstateRepository,TypeRepository $typeRepository):Response
+    public function home(Request $request, RealEstateRepository $realEstateRepository,TypeRepository $typeRepository):Response
 {
 
 
     $les3produitsCarossels= $realEstateRepository->findBy([],[],3);
     $les3derinersBiensAjoutee = $realEstateRepository->findBy([],['id'=>'DESC'],3);
     $types= $typeRepository->findAll();
+
     return $this->render('welcome/home.html.twig',[
         'typess' => $types,
         'products' => $les3derinersBiensAjoutee,
         'les3produitsCarossels'=> $les3produitsCarossels
     ]);
+
 }
 
     /**
      * @Route("/", name="search_home")
      */
-    public function index(PaginatorInterface $paginator, Request $request): Response
+    public function index(PaginatorInterface $paginator, Request $request)
     {
-        $type =[
+
+
+        //$lieu = $request->get('lieu');
+        dd($request);
+       /* $type =[
             1=>'maison',
             2=>'Appartement',
             3=>'Villa',
             4=>'Studio',
 
         ];
-        dump($type[0]);
 
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
         $properties = $repository->searchPageHome(
-            $request->get('city'),
-            $request->get('surface',0),
-            $request->get('price',9999999)
-        );
-        $pagination = $paginator->paginate(
-            $properties, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            6 /*limit per page*/
-        );
+            $request->get($lieu),
+            $request->get($surface,0),
+            $request->get($type),
+            $request->get($budget,9999999)
 
-        return $this->render('welcome/home.html.twig',[
+        );*/
+
+
+        /*$pagination = $paginator->paginate(
+            $properties, /* query NOT result */
+           /* $request->query->getInt('page', 1), /*page number*/
+         //   6 /*limit per page*/
+       // );
+
+        /*return $this->render('real_estate/index.html.twig',[
             'types' =>$type,
             'properties'=>$pagination,
-        ]);
+        ]);*/
     }
 }

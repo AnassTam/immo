@@ -53,6 +53,12 @@ class RealEstateRepository extends ServiceEntityRepository
 
     // cherche aliatoirement 3 produit au hasard pour le caroussel
     public function les3produitsCarossel(){
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT q  FROM App\Entity\RealEstate q order by rand() LIMIT 3 ");
+        $result= $query->execute();
+
+
         return  $this->createQueryBuilder('q')
             ->Select('RAND() ')
 
@@ -84,9 +90,12 @@ class RealEstateRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
 
     }
-    public function searchPageHome($city,$surface,$price){
 
-        // Select * From real_estate WHERE surface >50
+
+
+    public function searchPageHome($city,$surface,$budget,$type){
+
+
         $qb = $this->createQueryBuilder('r')
             // ->where('r.surface > :surface')
             //->andWhere('r.price <:price')
@@ -98,7 +107,7 @@ class RealEstateRepository extends ServiceEntityRepository
             $qb->andWhere('r.surface > :surface')->setParameter('surface',$surface);
         }
         if(!empty($price)){
-            $qb->andWhere('r.price < :price')->setParameter('price',$price);
+            $qb->andWhere('r.price < :budget')->setParameter('price',$budget);
         }
         if(!empty($type)){
             $qb->andWhere('r.type = :type')->setParameter('type',$type);

@@ -32,19 +32,21 @@ $(function() {
             var filesAmount = input.files.length;
 
 
-            for (i = 0; i < filesAmount; i++) {
+            for (let i = 0; i < filesAmount; i++) {
 
-                var reader = new FileReader();
+                let reader = new FileReader();
 
                 reader.onload = function(event) {
 
                     $($.parseHTML('<div>')).attr({
                             'class':'imgIconRemove',
+                            'id': i
                         }
                     ).appendTo(placeToInsertImagePreview);
                     $($.parseHTML('<img>')).attr({
                         'src': event.target.result,
-                        'class':'imagetest '
+                        'class':'imagetest ',
+
                     }
                     ).appendTo('.gallery > div:last-child');
                     $($.parseHTML('<div>')).attr({
@@ -64,8 +66,13 @@ $(function() {
     };
 
 });
-$('body').on('click','.imgIconRemove',function(){
-    $(this).remove();})
+//$('body').on('click','.imgIconRemove',function(){
+ //   $(this).remove();
+//})
+
+$('body').on('click', '.fa-remove', function() {
+    $(this).parent().remove()
+})
 
 
 

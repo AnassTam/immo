@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RealEstate
 {
-
     public const sizes=[
         1=>'Studio',
         2=>'T2',

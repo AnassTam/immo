@@ -2,148 +2,407 @@
 
 {% block page_base %}
     <h1 class="text-center my-4">Modifier l'annonce {{ realEstate.title }}</h1>
+{% extends 'base.html.twig' %}
+
+{% block page_base %}
+    <h1 class="text-center my-4">Ajouter une annonce</h1>
+    {{ form_start(realEstateForm) }}
 
     <div class="row">
+        <div class="container">
+
+
+            <br>
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-fill" role="tablist">
+
+                <li class="nav-item ">
+                    <a class="nav-link active" data-toggle="tab" href="#general">Général</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#informations">Informations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#surfaces">Surfaces</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#prestations">Prestation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#proximite">Proximité</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#reglementation">Réglementation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#comentaire">Commentaire</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content p-3" style ="background-color: #6ec7e5 ">
+                <div id="general" class="container tab-pane active" ><br>
+                    <h4>Général</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.categorieAnnonce) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.statut) }}</div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.type) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.rooms) }}</div></div>
+
+
+
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.city) }}</div>
+
+                    </div>
+
+                    <h4 class=" mt-5">Propriétaire </h4>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.adresseProprietaire,{'label':'Adresse'})}}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.villeAdresseProprietaire,{'label':'ville'})}}</div>
+                    </div>
+
+
+                    <h4 class=" mt-5">Prix </h4>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-6">{{ form_row(realEstateForm.price) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.documentsVendeurs) }}</div>
+
+                    </div>
+
+                    <div class="gallery2  align-self-center" ></div>
+
+
+                </div>
+
+
+
+                <div id="informations" class="container tab-pane fade"><br>
+                    <h3>Informations</h3>
+                    <br>
+
+                    <div class="row"><div class="col-6">{{ form_row(realEstateForm.nombrePiece) }}</div>
+                        <div class="col-6"> {{ form_row(realEstateForm.niveau) }}</div></div>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.standing) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.exposition) }}</div></div>
+                    <div class="row"><div class="col-6"> {{ form_row(realEstateForm.vueDubien) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.eauChaude) }}</div></div>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.chauffage) }}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.etatDuBien) }}</div>
+                    </div>
+                    <div class="row">
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6"> {{ form_row(realEstateForm.anneeConstruction) }}</div>
+                        <div class="col-6"> {{ form_row(realEstateForm.anneeRenovation)}}</div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.styleDuBien)}}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.charge)}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.taxeFonciere)}}</div>
+                        <div class="col-6">{{ form_row(realEstateForm.taxeHabitation)}}</div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-6">{{ form_row(realEstateForm.etage)}}</div>
+                    </div>
+
+                </div>
+                <div id="surfaces" class="container tab-pane fade">
+                    <br>
+                    <h3>Surfaces</h3>
+                    <br>
+                    <div class="col-10">{{ form_row(realEstateForm.surface,{'label':'Surface habitable'}) }}</div>
+
+                    <br>
+                    <br>
+                    <div class="row ">
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.balcon) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.balconSurface) }}  </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.garage) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.garageSurface) }} </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.cuisine) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.cuisineSurface) }}  </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.salon) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.salonSurface) }} </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                    </div>
+
+                    <br>
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.chambre1) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.chambre1Surface) }}  </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.chambre2) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.chambre2Surface) }} </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.chambre3) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.chambre3Surface) }}  </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.entree) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.entreeSurface) }} </div>
+                        <div  class="col-1 pl-0"> m² </div>
+                    </div>
+
+                    <br>
+
+
+                </div>
+                <div id="prestations" class="container tab-pane fade"><br>
+
+
+                    <h3>Equipements</h3>
+                    <br>
+                    <div class="row">
+                        <div class="col-3"> {{ form_row(realEstateForm.AdoucisseurEau) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.cheminee) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.internet) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.airConditionne) }}</div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-3">{{ form_row(realEstateForm.stores) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.doubleVitrage) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.aspirateurCentralisee) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.voletsRoulantsElectrique) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.fenetresCoulissante) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.tripleVitrage) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.panneauSolaires) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.fibreOptique) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.alarmeIncendie) }}</div>
+                    </div>
+                    <h3 class=" mt-5">Espaces extérieurs</h3>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-3">{{ form_row(realEstateForm.piscine) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.borneVoitureElectrique) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.abriVoiture) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.arrosage) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.puits) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.barbecue) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.eclairageExterieur) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.source) }}</div>
+
+                    </div>
+                    <h3 class=" mt-5">Bâtiment</h3>
+                    <br>
+                    <div class="row">
+                        <div class="col-3 ">{{ form_row(realEstateForm.ascenseur) }}</div>
+                        <div class="col-3 "> {{ form_row(realEstateForm.buanderieCommune) }}</div>
+                        <div class="col-3 "> {{ form_row(realEstateForm.parking) }}</div>
+
+                    </div>
+
+                    <h3 class=" mt-5">Sécurite</h3>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-3 ">{{ form_row(realEstateForm.concierge) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.alarme) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.porteBlindee) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.digicode) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.gardien) }}</div>
+                        <div class="col-3"> {{ form_row(realEstateForm.videoSurveillance) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.videSanitaire) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.interphone) }}</div>
+                        <div class="col-3">{{ form_row(realEstateForm.videophone) }}</div>
+                    </div>
+
+                </div>
+                <div id="proximite" class="container tab-pane fade"><br>
+
+                    <h3>Proximité</h3>
+                    <br>
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.aeroport) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.aeroportDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.centreVille) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.centreVilleDistance) }} </div>
+                        <div  class="col-1 pl-0"> m </div>
+                    </div>
+
+
+                    <br>
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.creche) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.crecheDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.gare) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.gareDistance) }} </div>
+                        <div  class="col-1 pl-0"> m </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.medecin) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.medecinDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.piscinePublique) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.piscinePubliqueDistance) }} </div>
+                        <div  class="col-1 pl-0"> m </div>
+                    </div>
+
+                    <br>
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.supermarche) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.supermarcheDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.metro) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.metroDistance) }} </div>
+                        <div  class="col-1 pl-0"> m </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.autoroute) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.autorouteDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+                        <div  class="col-2 offset-2"> {{ form_widget(realEstateForm.cinema) }}</div>
+                        <div  class="col-2 "> {{ form_widget(realEstateForm.cinemaDistance) }} </div>
+                        <div  class="col-1 pl-0"> m </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+
+                        <div  class="col-2  pr-0"> {{ form_widget(realEstateForm.ecolePrimaire) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.ecolePrimaireDistance) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+
+                    </div>
+
+
+
+                </div>
+                <div id="reglementation" class="container tab-pane fade"><br>
+                    <h3>Réglementation</h3>
+                    <div class="row ">
+                        <div  class="col-2  pr-0"> {{ form_row(realEstateForm.electricite) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.elctriciteValeur) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+
+                    </div>
+                    <div class="row ">
+                        <div  class="col-2  pr-0"> {{ form_row(realEstateForm.gaz) }}</div>
+                        <div  class="col-2  pl-0 "> {{ form_widget(realEstateForm.gazValeur) }}  </div>
+                        <div  class="col-1 pl-0"> m </div>
+
+                    </div>
+
+                </div>
+                <div id="comentaire" class="container tab-pane fade"><br>
+                    <h3>Commentaire</h3>
+                    {{ form_row(realEstateForm.title) }}
+                    {{ form_row(realEstateForm.description) }}
+
+                </div>
+
+                <div id="photos" class="container tab-pane fade"><br>
+                    <h3>Photos</h3>
+                    {{ form_row(realEstateForm.imagesSupp) }}
+                    <div class=" row gallery " ></div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" style="background-color: #F8F9FA">
         <div class="col-lg-8 offset-lg-2">
 
-            {{ form_start(realEstateForm) }}
+
             <div class="row">
+
                 <div class="col-lg-6">
-                    {{ form_label(realEstateForm.title, 'Titre') }}
-                    {{ form_widget(realEstateForm.title) }}
+
+
                 </div>
                 <div class="col-lg-6">
 
-                    {{ form_row(realEstateForm.description) }}
                 </div>
                 <div class="col-lg-6">
-                    {{ form_row(realEstateForm.surface) }}
+
                 </div>
                 <div class="col-lg-6">
-                    {{ form_row(realEstateForm.price) }}
+
                 </div>
-                <div class="col-lg-6">
-                    {{ form_row(realEstateForm.rooms) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.type) }}
-                </div>
+
                 <div class="col-lg-3">
                     <div class="pt-1">
-                        {{ form_row(realEstateForm.sold) }}
+
                     </div>
-                </div>
-                {# --------------------------- #}
-
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.city) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.rereferenceDuBien) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.chambre) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.standing) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.etatDuBien) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.vuDuBien) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.eauChaude) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.chauffage) }}
-                </div>
-                <div class="col-lg-3">
-
-                    {{ form_row(realEstateForm.styleDuBien) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.niveau) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.ascenseur) }}
-                </div>
-                <div class="col-lg-6">
-                    {{ form_row(realEstateForm.duplex) }}
-                </div>
-                <div class="col-lg-6">
-
-                    {{ form_row(realEstateForm.loft) }}
-                </div>
-                <div class="col-lg-6">
-                    {{ form_row(realEstateForm.dernierEtage) }}
-                </div>
-                <div class="col-lg-6">
-                    {{ form_row(realEstateForm.avecPiscine) }}
-                </div>
-                <div class="col-lg-3">
-                    {{ form_row(realEstateForm.balcon) }}
-                </div>
-                <div class="col-lg-3">
-                    <div class="pt-1">
-                        {{ form_row(realEstateForm.garage) }}
-                    </div>
-                </div>
-                    <div class="col-lg-3">
-                        {{ form_row(realEstateForm.parking) }}
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="pt-1">
-                            {{ form_row(realEstateForm.personneHandicapee) }}
-                    </div>
-                        <div class="col-lg-3">
-                            {{ form_row(realEstateForm.investissementLocatif) }}
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="pt-1">
-                                {{ form_row(realEstateForm.visitevirtuelle) }}
-                            </div>
-                            <div class="col-lg-6">
-                                {{ form_row(realEstateForm.exposition) }}
-                            </div>
-                            div class="col-lg-6">
-
-                            {{ form_row(realEstateForm.anneeConstruction) }}
-                        </div>
-                        <div class="col-lg-6">
-                            {{ form_row(realEstateForm.anneeRenovation) }}
-                        </div>
-                        <div class="col-lg-6">
-                            {{ form_row(realEstateForm.etage) }}
-                        </div>
-                        <div class="col-lg-6">
-                            {{ form_row(realEstateForm.charge) }}
-                        </div>
-                        <div class="col-lg-6">
-                            {{ form_row(realEstateForm.statut) }}
-                        </div>
-
-
-
-                {# ----------------------------- #}
-
-                <div class="col-lg-8">
-                    {{ form_row(realEstateForm.image) }}
-                </div>
-                <div class="col-lg-4">
-                    <img class="img-fluid" src="{{ asset('img/uploads/' ~ realEstate.image) }}" alt="{{ realEstate.title }}" />
                 </div>
             </div>
-
-
             {{ form_widget(realEstateForm) }}
-
-            <div class="text-center">
-                <button class="btn btn-primary my-5" formnovalidate>Modifier</button>
-            </div>
+            <button class="btn btn-primary" formnovalidate>Ajouter</button>
             {{ form_end(realEstateForm) }}
         </div>
     </div>
+
+
+
+
+    {# ----------------------------------- #}
+    <div class="wrapper">
+
+        <div class="images">
+            <div class="pic">
+                Ajouter vos images
+            </div>
+        </div>
+
+    </div>
+
+
+
+
 
 {% endblock %}

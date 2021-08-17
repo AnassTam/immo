@@ -14,9 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Repository\RealEstateRepository;
 
 class RealEstateController extends AbstractController
 {
+
+
     /**
      * @Route("/tous-les-biens", name="real_estate_list")
      *
@@ -32,6 +35,7 @@ class RealEstateController extends AbstractController
             4=>'T4',
             5=>'T5',
         ];
+
 
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
         $properties = $repository->findAllWiththeFilters(
@@ -58,7 +62,7 @@ class RealEstateController extends AbstractController
      */
 
     public function recherchepartype($title, PaginatorInterface $paginator,Request $request): Response{
-
+ dd($request);
         $sizes=[
             1=>'Studio',
             2=>'T2',
@@ -96,14 +100,13 @@ class RealEstateController extends AbstractController
     /**
      * @Route("/nos-bien/{slug}_{id}", name="real_estate_show")
      */
-
-    public function show(RealEstate $property)
+    // public function show($id, RealEstateRepository $repository)
+    public function show($id, RealEstateRepository $repository)
     {
-
-
+        $realEstate = $repository->find($id);
         return $this->render('real_estate/show.html.twig',[
-            'property'=>$property,
-            'title'=>$property->getTitle(),
+            'property'=>$realEstate,
+            'title'=>$realEstate->getTitle()
         ]);
 
 

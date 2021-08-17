@@ -5,49 +5,61 @@
 
      {# php image accueil et formulaire#}
      <div class="row mt-5" >
-         <div class="card col-12    " >
+         <div class="card col-12" >
              <img class="" src="{{ asset('img/image_accueil1.png') }}" alt="Card image">
-             <div class="card-img-overlay">
-                 <div class="col-md-3 offset-md-3 bg-light h-75 pt-5 ">
+             <div class="card-img-overlay" >
+                 <div class="col-10 bg-light h-50 pt-5  m-auto "  >
+
                      <h3>Chercher un bien</h3>
-                     <form action="" method="get">
-                         <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
-                         <div class="form-group">
-                             <label for="exampleFormControlSelect1">Type de bien </label>
-                             <select class="form-control mb-3" name="leBien">
-                                 <option>Maison</option>
-                                 <option>appartement </option>
-                                 <option>Garage</option>
-                                 <option>Villa</option>
+                 </br>
+
+                        <form action="{{ path('search_home') }}" method="POST">
+                         <div class=" row form-group">
+                             <div class="col-3">
+                                 <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
+                             </div>
+                             <div class="col-3">
+
+                                 <select class="form-control mb-3" name="type">
+                                     <option selected="selected" disabled>Type de bien</option>
+                                     <option>Maison</option>
+                                     <option>appartement </option>
+                                     <option>Garage</option>
+                                     <option>Villa</option>
+                                 </select>
+                                 </div>
+                             <div class="col-3">
+                             <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
+                            </div>
+                             <div class="col-3">
+                         <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
+
+                 </div>
+                         <div class="col-3 offset-9 ">
+                             <input class="col btn btn-primary" type="submit" value="filtrer">
+                         </div>
+                         </div>
+
+                     </form>
 
 
-                                 {# <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
+             </div>
+             </div>
+
+        </div>
+
+     {# <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
                                  {% for size in sizes %}
                                      <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
                                  {% endfor %}#}
 
-                             </select>
-                         </div>
-                         <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
-                         <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
-                         {# <select class="form-control mb-3" name="size">
+     {# <select class="form-control mb-3" name="size">
                                  <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
                                  {% for size in sizes %}
                                      <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
                                  {% endfor %}
 
                              </select> #}
-
-
-
-                         <button class="btn btn-primary btn-block ">Filtrer </button>
-                     </form>
-                 </div>
-
-             </div>
-         </div>
-
-     </div>
      {#  2 div   j'achete un bien & je vends mon  bien  #}
 
      <div class="row justify-content-center mt-5 " style="background-color:  #EBEBEB">
@@ -90,8 +102,9 @@
                      <div class="carousel-inner">
                          {% for c in les3produitsCarossels %}
                              <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
+                                 <a href="{{ path('real_estate_show',{slug:c.slug, id:c.id}) }}" class="stretched-link">
                                  <img class=" -block w-100 imgscarossel " src="{{ asset('img/uploads/' ~ c.image) }}" >
-
+                                 </a>
                                  <div href="#" class="carousel-caption d-none d-md-block stretched-link">
                                      <h5>{{ c.title }}</h5>
                                      <p> {{ c.price }}</p>

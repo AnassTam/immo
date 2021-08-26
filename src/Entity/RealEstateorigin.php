@@ -1161,7 +1161,7 @@ class RealEstate
         return $this;
     }
 
-    public function getAdoucisseurEau(): ?bool
+    public function getAdoucisseurEau(): ?string
     {
         return $this->AdoucisseurEau;
     }
@@ -1605,7 +1605,7 @@ class RealEstate
         return $this;
     }
 
-    public function getGare(): ?bool
+    public function getGare(): ?int
     {
         return $this->gare;
     }
@@ -1617,7 +1617,7 @@ class RealEstate
         return $this;
     }
 
-    public function getMedecin(): ?bool
+    public function getMedecin(): ?int
     {
         return $this->medecin;
     }
@@ -1629,7 +1629,7 @@ class RealEstate
         return $this;
     }
 
-    public function getPiscinePublique(): ?bool
+    public function getPiscinePublique(): ?int
     {
         return $this->piscinePublique;
     }
@@ -1641,7 +1641,7 @@ class RealEstate
         return $this;
     }
 
-    public function getSupermarche(): ?bool
+    public function getSupermarche(): ?int
     {
         return $this->supermarche;
     }
@@ -1653,7 +1653,7 @@ class RealEstate
         return $this;
     }
 
-    public function getMetro(): ?bool
+    public function getMetro(): ?int
     {
         return $this->metro;
     }
@@ -1665,7 +1665,7 @@ class RealEstate
         return $this;
     }
 
-    public function getAutoroute(): ?bool
+    public function getAutoroute(): ?int
     {
         return $this->autoroute;
     }
@@ -1677,7 +1677,7 @@ class RealEstate
         return $this;
     }
 
-    public function getCinema(): ?bool
+    public function getCinema(): ?int
     {
         return $this->cinema;
     }
@@ -1689,7 +1689,7 @@ class RealEstate
         return $this;
     }
 
-    public function getEcolePrimaire(): ?bool
+    public function getEcolePrimaire(): ?int
     {
         return $this->ecolePrimaire;
     }

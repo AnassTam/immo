@@ -27,44 +27,26 @@ $(function() {
         imagesPreview(this, 'div.gallery2');
     });
     var imagesPreview = function(input, placeToInsertImagePreview) {
-
         if (input.files) {
             var filesAmount = input.files.length;
-
-
             for (let i = 0; i < filesAmount; i++) {
-
                 let reader = new FileReader();
-
                 reader.onload = function(event) {
-
-                    $($.parseHTML('<div>')).attr({
-                            'class':'imgIconRemove',
+                    $($.parseHTML('<div>')).attr({'class':'imgIconRemove',
                             'id': i
                         }
                     ).appendTo(placeToInsertImagePreview);
-                    $($.parseHTML('<img>')).attr({
-                        'src': event.target.result,
+                    $($.parseHTML('<img>')).attr({'src': event.target.result,
                         'class':'imagetest ',
-
                     }
                     ).appendTo('.gallery > div:last-child');
-                    $($.parseHTML('<div>')).attr({
-
-                            'class':'iconeRemove fa fa-remove',
+                    $($.parseHTML('<div>')).attr({'class':'iconeRemove fa fa-remove',
                         }
                     ).appendTo('.gallery > div:last-child');
-
                 }
                 reader.readAsDataURL(input.files[i]);
-
-            }
-
-
-        }
-
+            }}
     };
-
 });
 //$('body').on('click','.imgIconRemove',function(){
  //   $(this).remove();

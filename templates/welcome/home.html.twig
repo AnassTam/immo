@@ -1,25 +1,20 @@
 {% extends 'base.html.twig' %}
  {% block page_base %}
-
-     <div class="container-fluid px-0   " >
-
+     <div class="container-fluid px-0 " >
      {# php image accueil et formulaire#}
      <div class="row mt-5" >
          <div class="card col-12" >
              <img class="" src="{{ asset('img/image_accueil1.png') }}" alt="Card image">
              <div class="card-img-overlay" >
                  <div class="col-10 bg-light h-50 pt-5  m-auto "  >
-
                      <h3>Chercher un bien</h3>
                  </br>
-
                         <form action="{{ path('search_home') }}" method="POST">
                          <div class=" row form-group">
                              <div class="col-3">
                                  <input type="text" class="form-control mb-3" name="lieu"  placeholder="Lieu" value="{{ app.request.get('lieu') }}">
                              </div>
                              <div class="col-3">
-
                                  <select class="form-control mb-3" name="type">
                                      <option selected="selected" disabled>Type de bien</option>
                                      <option>Maison</option>

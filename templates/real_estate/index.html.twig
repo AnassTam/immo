@@ -1,24 +1,22 @@
 {% extends 'base.html.twig' %}
-
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/chercher.js') }}"></script>
 {% endblock %}
-
 {% block page_base %}
     <div class="row my-4">
         <div class="col-lg-10">
     <h1 class="text-center">Toutes les annonces</h1>
-    <div class="row">
-        <div class="col-lg-3">
-            <form action="" method="get">
-                <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
-                <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
-                <select class="form-control mb-3" name="size">
-                    <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
-                    {% for size in sizes %}
+        <div class="row">
+            <div class="col-lg-3">
+                <form action="" method="get">
+                    <input type="number" class="form-control mb-3" name="surface"  placeholder="surface minimun" value="{{ app.request.get('surface') }}">
+                    <input type="number" class="form-control mb-3" name="budget"   placeholder="Budget maximum" value="{{ app.request.get('budget') }}">
+                    <select class="form-control mb-3" name="size">
+                        <option value="" disabled {{app.request.get('size')==null?'select'}} selected >Nombre de pièce</option>
+                        {% for size in sizes %}
                         <option value="{{ loop.index }}" {{ loop.index ==app.request.get('size')?'selected' }}>{{ size }}</option>
-                    {% endfor %}
+                        {% endfor %}
 
                 </select>
                 <button class="btn btn-primary btn-block ">Filtrer </button>
@@ -35,20 +33,15 @@
                         {% if property.sold %}
                         <img  class = "vendu"   src="{{ asset('img/sold.png') }}" alt="Vendu">
                         {% endif %}
-                        <img  class = "AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}" >
+                        <img class ="AllCardImage" src="{{ asset('img/uploads/' ~ property.image) }}" alt="{{ property.title }}">
                     <div class="card-body">
                         <h5 class="card-title">
                             <a href="{{ path('real_estate_show',{slug:property.slug, id:property.id}) }}">
                                 {{ property.title }}-réf : {{ property.referenceDuBien }}
-
                             </a>
                         </h5>
-                        <p class="card-text">
-                            {{ property.surface }}m² - {{ property.rooms }} pièce(s)
-                        </p>
-                        <p class="card-text">
-                           {{ property.price}} euros.
-                        </p>
+                        <p class="card-text"> {{ property.surface }}m² - {{ property.rooms }} pièce(s) </p>
+                        <p class="card-text">{{ property.price}} euros.</p>
 
                         {# condition pour verifier que l'utilistaeur est le propriaire de l'annonce  #}
                         {% if app.user == property.owner %}

@@ -22,12 +22,8 @@ class RealEstateController extends AbstractController
 
     /**
      * @Route("/tous-les-biens", name="real_estate_list")
-     *
-     *
      */
-    public function index(PaginatorInterface $paginator, Request $request): Response
-    {
-
+    public function index(PaginatorInterface $paginator, Request $request): Response{
         $sizes=[
             1=>'Studio',
             2=>'T2',
@@ -35,22 +31,17 @@ class RealEstateController extends AbstractController
             4=>'T4',
             5=>'T5',
         ];
-
-
         $repository = $this->getDoctrine()->getRepository(RealEstate::class);
         $properties = $repository->findAllWiththeFilters(
             $request->get('surface',0),
             $request->get('price',9999999),
             $request->get('size')
         );
-
-
         $pagination = $paginator->paginate(
             $properties, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );
-
         return $this->render('real_estate/index.html.twig',[
             'sizes' =>$sizes,
             'properties'=>$pagination,
@@ -62,7 +53,7 @@ class RealEstateController extends AbstractController
      */
 
     public function recherchepartype($title, PaginatorInterface $paginator,Request $request): Response{
- dd($request);
+
         $sizes=[
             1=>'Studio',
             2=>'T2',
@@ -124,17 +115,17 @@ class RealEstateController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted()&& $form->isValid()){
-            // Ici   ajout ds la base de donnée  si tt est bon
+                    // Ici   ajout ds la base de donnée  si tt est bon
 
-            //On récupère les images transmises
-            $images =$form->get('imagesSupp')->getData();
+                    //On récupère les images transmises
+                    $images =$form->get('imagesSupp')->getData();
 
-            // On boucle  sur es imagesSupp
-            foreach ($images as $image){
-                //On génère un nouveau fichier
-                $fichier =md5(uniqid()) .  '.' .$image->guessExtension();
-                //On copie le fichier dans le dossier uploads
-                $image->move(
+                    // On boucle  sur es imagesSupp
+                    foreach ($images as $image){
+                        //On génère un nouveau fichier
+                        $fichier =md5(uniqid()) .  '.' .$image->guessExtension();
+                        //On copie le fichier dans le dossier uploads
+                        $image->move(
                     $this->getParameter('upload_img_directory'),
                     $fichier
                 );
@@ -188,9 +179,10 @@ class RealEstateController extends AbstractController
     /**
      * @route("/nos-biens/modifier/{id}", name="real_estate_edit")
      */
-    public function edit(Request $request, RealEstate $realEstate){
+    public function edit($id,Request $request,RealEstateRepository $repository){
 
         // Condition de voir si l'utilisateur a bien le droit   de modifier l'annonce$
+        $realEstate = $repository->find($id);
 
         if($this->getUser() !==$realEstate->getOwner()){
             throw $this->createAccessDeniedException(); // affiche erreur
@@ -200,17 +192,31 @@ class RealEstateController extends AbstractController
 
         $form = $this->createForm(RealEstateType::class,$realEstate);
         $form->handLeREquest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+
             // Modification de l 'image
 
-            $image=$form->get('image')->getData();
-            if ($image) {
+            if($form->isSubmitted()&& $form->isValid()){
+                // Ici   ajout ds la base de donnée  si tt est bon
 
-                $image = $form->get('image')->getData();
-                $fileName = uniqid() . '.' . $image->guessExtension();
-                $image->move($this->getParameter('upload_directory'), $fileName);
-                $realEstate->setImage($fileName);
-            }
+                //On récupère les images transmises
+            $images =$form->get('imagesSupp')->getData();
+
+                    // On boucle  sur es imagesSupp
+                    foreach ($images as $image){
+                        //On génère un nouveau fichier
+                        $fichier =md5(uniqid()) .  '.' .$image->guessExtension();
+                        //On copie le fichier dans le dossier uploads
+                        $image->move(
+                            $this->getParameter('upload_img_directory'),
+                            $fichier
+                        );
+                        // On stocke l 'imageSupp dans la base de données( le nom
+                        $img = new ImagesSupp();
+                        $img->setName($fichier);
+                        $realEstate->addImagesSupp($img);
+
+                    }
+
 
             // après la modif
             $this->getDoctrine()->getManager()->flush();
@@ -227,9 +233,10 @@ class RealEstateController extends AbstractController
     /**
      * @route("/nos-biens/supprimer/{id}", name="real_estate_delete")
      */
-    public function delete(RealEstate $realEstate){
+    public function delete($id,RealEstateRepository $repository){
         // Condition de voir si l'utilisateur a bien le droit   de supprimer l'annonce$
 
+        $realEstate = $repository->find($id);
         if($this->getUser() !==$realEstate->getOwner()){
             throw $this->createAccessDeniedException(); // affiche erreur
         }

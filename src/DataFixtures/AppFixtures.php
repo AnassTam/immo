@@ -71,7 +71,7 @@ class AppFixtures extends Fixture
         }
 
 
-        for($i=1 ;$i<= 5; $i++){
+        for($i=1 ;$i<= 20; $i++){
             $realEstate = new RealEstate();
             $type =$this->getReference('type-'.rand(0,count($typeNames)-1));
             $title= ucfirst($type->getName()).' ';
